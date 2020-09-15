@@ -7,5 +7,7 @@ using UnityEngine;
 /// </summary>
 public enum EEnemy
 {
-    None
+    None,
+    A20g,
+    C47a
 }
