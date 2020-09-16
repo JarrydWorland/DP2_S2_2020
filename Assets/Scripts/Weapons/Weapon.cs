@@ -4,7 +4,9 @@ public class Weapon : MonoBehaviour
 {
     //Private Fields---------------------------------------------------------------------------------------------------------------------------------
 
+    [SerializeField] private GameObject projectile;
     [SerializeField] private uint cooldown;
+    [SerializeField] private Vector3 shootOffset;
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
@@ -12,7 +14,7 @@ public class Weapon : MonoBehaviour
 
     //Initialisation Methods-------------------------------------------------------------------------------------------------------------------------
 
-    private void Awake()
+    private void Start()
     {
         ResetCooldown();
     }
@@ -25,14 +27,6 @@ public class Weapon : MonoBehaviour
         if (timer > 0)
         {
             timer--;
-        }
-
-        print(timer);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (CanShoot())
-                Shoot();
         }
     }
 
@@ -51,8 +45,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
-        //TODO: spawn bullet.
-        print("pew pew!");
+        Instantiate(projectile, transform.position + shootOffset, transform.parent.rotation, transform.parent);
         ResetCooldown();
     }
 
