@@ -16,6 +16,7 @@ public class EnemyMovementController : MonoBehaviour
     //Non-Serialized Fields------------------------------------------------------------------------
 
     private Vector3 movement;
+    private Enemy enemy;
 
     //Initialization Methods-------------------------------------------------------------------------------------------------------------------------
 
@@ -26,6 +27,7 @@ public class EnemyMovementController : MonoBehaviour
     private void Awake()
     {
         movement = new Vector3(0, -speed, 0);
+        enemy = GetComponent<Enemy>();
     }
 
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
@@ -47,5 +49,17 @@ public class EnemyMovementController : MonoBehaviour
     {
         //TODO: complex movement
         transform.Translate(movement * Time.deltaTime);
+    }
+
+    //Triggered Methods------------------------------------------------------------------------------------------------------------------------------
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log($"Collision, me is {collision.otherCollider}, other is {collision.collider}");
+        if (collision.collider.tag == "Map Bounds")
+        {
+            //Debug.Log($"Other is Map Bounds");
+            EnemyFactory.Instance.Destroy(enemy, enemy.Type);
+        }
     }
 }
