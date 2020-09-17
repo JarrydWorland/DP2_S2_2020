@@ -6,7 +6,6 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private GameObject projectile;
     [SerializeField] private uint cooldown;
-    [SerializeField] private Vector3 shootOffset;
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
@@ -45,7 +44,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
-        Instantiate(projectile, transform.position + transform.rotation * shootOffset, transform.parent.rotation, transform.parent);
+        Instantiate(projectile, transform.position, transform.parent.rotation, transform.parent);
         ResetCooldown();
     }
 
