@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         // instantiate new enemy from enemy class
         Enemy _enemy = new Enemy();
+        _numEnemies++;
     }
 
     private void KilledEnemy()
