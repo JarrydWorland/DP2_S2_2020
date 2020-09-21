@@ -24,15 +24,15 @@ public class Item : MonoBehaviour
 
 	//Basic Public Properties----------------------------------------------------------------------
 
-	public int getItemCharges()
+	public int GetItemCharges()
 	{
 		return itemCharges;
 	}
-	public string getItemName()
+	public string GetItemName()
 	{
 		return itemName;
 	}
-	public string getItemDescription()
+	public string GetItemDescription()
 	{
 		return itemDescription;
 	}
@@ -55,5 +55,17 @@ public class Item : MonoBehaviour
 	public virtual void UseItem()
 	{
 		Debug.Log("Item Used");
+	}
+
+	/// <summary>
+	/// Creates a copy of the item in the players inventory then destroys itself.
+	/// </summary>
+	public void OnCollisionEnter(Collision other)
+	{
+		if (other.gameObject.CompareTag("Player"))
+		{
+			//TODO Create new copy in players inventory
+			Destroy(gameObject);
+		}
 	}
 }
