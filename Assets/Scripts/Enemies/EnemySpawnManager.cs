@@ -12,6 +12,9 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
     //Serialized Fields----------------------------------------------------------------------------
 
     [SerializeField] private TextAsset waveDataFile;
+    [SerializeField] private Vector3 spawnRotation;
+    [SerializeField] private string testWaveId;
+    [SerializeField] private bool testSpawnNow;
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
@@ -43,29 +46,116 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
     /// </summary>
     private void LoadWaveDataFromFile()
     {
-        //if text file is null
+        if (waveDataFile == null)
+        {
+            Debug.LogError($"EnemySpawnManager is missing the wave data file.");
+        }
+        else
+        {
+            string[] data = waveDataFile.text.Split(new char[] { '\n' });
+            waveData = new Dictionary<string, List<SpawnData>>();
 
-            //Error message
+            for (int i = 0; i < data.Length; i++)
+            {
+                string line = data[i];
 
-        //else
+                if (line[0] == '#')
+                {
+                    //Debug.Log($"Wave Data File, line {i + 1}: ignoring comment. Line is \"{line}\".");
+                    continue;
+                }
 
-            //Load text file
+                string[] lineData = line.Split(new char[] { ':' });
 
-            //for each line
+                if (lineData.Length != 3)
+                {
+                    Debug.LogError($"Wave Data File, line {i + 1}: line must have 3 attributes, has {lineData.Length}. Line is \"{line}\".");
+                    continue;
+                }
 
-                //if line is comment
+                if (lineData[0] == "")
+                {
+                    Debug.LogError($"Wave Data File, line {i + 1}: wave ID must be specified. Line is \"{line}\".");
+                    continue;
+                }
 
-                    //ignore
+                EEnemy type;
 
-                //else if line is invalid
+                switch (lineData[1])
+                {
+                    case "A20g":
+                        type = EEnemy.A20g;
+                        break;
+                    case "C47a":
+                        type = EEnemy.C47a;
+                        break;
+                    default:
+                        type = EEnemy.None;
+                        break;
+                }
 
-                    //Error message
+                if (type == EEnemy.None)
+                {
+                    Debug.LogError($"Wave Data File, line {i + 1}: enemy type {lineData[1]} is invalid. Line is \"{line}\".");
+                    continue;
+                }
 
-                //else
-                
-                    //Translate line to spawn data
+                string[] coordinateData = lineData[2].Split(new char[] { ',' });
 
-                    //Add spawn data to list
+                if (coordinateData.Length != 3)
+                {
+                    Debug.LogError($"Wave Data File, line {i + 1}: position attribute must have 3 coordinates, has {coordinateData.Length}. Line is \"{line}\".");
+                    continue;
+                }
+
+                float[] coordinates = new float[3];
+                bool validPos = true;
+
+                for (int j = 0; j < coordinateData.Length; j++)
+                {
+                    try
+                    {
+                        coordinates[j] = float.Parse(coordinateData[j], System.Globalization.CultureInfo.InvariantCulture);
+                    }
+                    catch
+                    {
+                        validPos = false;
+                        break;
+                    }
+                }
+
+                if (!validPos)
+                {
+                    Debug.LogError($"Wave Data File, line {i + 1}: could not parse position coordinates \"{lineData[2]}\" as floats. Line is \"{line}\".");
+                    continue;
+                }
+
+                Vector3 pos = new Vector3(coordinates[0], coordinates[1], coordinates[2]);
+
+                //TODO: check that pos is within acceptable bounds
+
+                if (!waveData.ContainsKey(lineData[0]))
+                {
+                    waveData[lineData[0]] = new List<SpawnData>();
+                }
+
+                waveData[lineData[0]].Add(new SpawnData(type, pos));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Start() is run on the frame when a script is enabled just before any of the Update methods are called for the first time. 
+    /// Start() runs after Awake().
+    /// </summary>
+    private void Update()
+    {
+        //Testing only
+        if (testSpawnNow)
+        {
+            testSpawnNow = false;
+            SpawnWave(testWaveId);
+        }
     }
 
     //Triggered Methods------------------------------------------------------------------------------------------------------------------------------
@@ -76,14 +166,16 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
     /// <param name="id">The ID of the wave to be spawned.</param>
     public void SpawnWave(string id)
     {
-        //if dictionary has non-empty list matching id
-        
-            //for each spawn data
-
-                //Instantiate enemy according to spawn data via EnemyFactory
-
-        //else
-
-            //Error message
+        if (waveData.ContainsKey(id) && waveData[id].Count > 0)
+        {
+            foreach (SpawnData s in waveData[id])
+            {
+                Enemy enemy = EnemyFactory.Instance.Get(s.position, spawnRotation, s.type);
+            }
+        }
+        else
+        {
+            Debug.LogError($"No wave data for wave {id}.");
+        }
     }
 }

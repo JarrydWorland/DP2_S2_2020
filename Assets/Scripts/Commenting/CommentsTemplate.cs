@@ -35,12 +35,7 @@ public class CommentsTemplate : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        //if (Instance != null)
-        //{
-        //    Debug.LogError("There should never be more than one [CLASSNAME].");
-        //}
 
-        //Instance = this;
     }
 
     /// <summary>
