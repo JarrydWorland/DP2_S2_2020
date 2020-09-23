@@ -2,95 +2,97 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+private enum GameState
 {
-    public static GameManager instance;
+    PLAYING,
+    MENU
+}
+
+public delegate void StateHandler();
+
+public class GameManager
+{
+    protected GameManager() {}
+    private static GameManager _instance = null;
+    public event StateHandler OnStateChange;
+
+    public GameState gameState
+    {
+        get;
+        private set;
+    }
 
     private int _score;
     private int _timeMs;
     private int _diff;
     private int _numEnemies;
-    private GameObject _paused;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (GameManager.instance == null)
+            {
+                DontDestroyOnLoad(GameManager.instance);
+                GameManager.instance = new GameManager();
+            }
+            return GameManager.instance;
+        }
+    }
+
+    public void SetState(GameState state)
+    {
+        this.gameState = state;
+        OnStateChange();
+    }
+
+    void Start()
+    {
+        _timeMs = _score = 0;
+        MakePlayer();
+    }
+
+    void Exit()
+    {
+        GameManager.instance = null;
+    }
 
     private void MakePlayer()
     {
         // if game is not playing then remove player
-        if (instance != null)
+        if (Player.instance == null)
         {
-            Destroy(gameObject);
+            Destroy(Player.instance);
         }
         // if game is paused keep player
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(Player.instance);
         }
     }
 
     private void SpawnEnemy()
     {
-        // instantiate new enemy from enemy class
-        Enemy _enemy = new Enemy();
+        Enemy.instance = new Enemy();
         _numEnemies++;
     }
 
     private void KilledEnemy()
     {
+        Destroy(Enemy.instance);
         _numEnemies--;
         _score++;
-        Destroy(gameObject);
     }
 
     private void PauseGame()
     {
-        Time.timeScale = 0;
-        pausePanel.SetActive(true);
-        // disable scripts that still work while timescale is set to 0
+        SetState(1);
     }
 
     private void ContinueGame()
     {
-        Time.timeScale = 1;
-        pausePanel.SetActive(false);
-        // enable the scripts again
-    }
-
-    void Start()
-    {
-        pausePanel.SetActive(false);
-        _timeMs = _score = 0;
-        MakePlayer();
-    }
-
-    void Update()
-    {
-        if (true) // change this to when the menu opens or closes
-        {
-            if (!_paused.activeInHierarchy)
-            {
-                PauseGame();
-            }
-            if (_paused.activeInHierarchy)
-            {
-                ContinueGame();
-            }
-        }
-    }
-
-    // default 0.02s period (50 tick)
-    void FixedUpdate()
-    {
-        _timeMs = _timeMs + 20;
-
-        if(_timeMs % 10000 == 0)
-        {
-            _difficulty++;
-        }
-
-        if(_timeMs % (10000/_difficulty) == 0)
-        {
-            SpawnEnemy();
-        }
+        SetState(0);
     }
 
     public int Score
@@ -114,6 +116,35 @@ public class GameManager : MonoBehaviour
         set
         {
             _timeMs = value;
+        }
+    }
+
+    void Update()
+    {
+        if (this.gameState == GameState.MENU) // change this to when the menu opens or closes
+        {
+            Time.timeScale = 0;
+
+        }
+        if (this.gameState == GameState.PLAYING)
+        {
+            Time.timeScale = 1;
+        }
+    }
+
+    // default 0.02s period (50 tick)
+    void FixedUpdate()
+    {
+        _timeMs = _timeMs + 20;
+
+        if(_timeMs % 10000 == 0)
+        {
+            _difficulty++;
+        }
+
+        if(_timeMs % (10000/_difficulty) == 0)
+        {
+            SpawnEnemy();
         }
     }
 }
