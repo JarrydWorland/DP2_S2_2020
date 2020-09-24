@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-private enum GameState
+public enum GameState
 {
     PLAYING,
     MENU
@@ -10,7 +10,7 @@ private enum GameState
 
 public delegate void StateHandler();
 
-public class GameManager
+public class GameManager : MonoBehaviour
 {
     protected GameManager() {}
     private static GameManager _instance = null;
