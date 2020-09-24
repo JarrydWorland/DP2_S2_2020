@@ -12,6 +12,20 @@ public class EnemyFactory: Factory<EnemyFactory, Enemy, EEnemy>
     /// <summary>
     /// Retrieves an enemy from the pool if there's any available, and instantiates a new one if none are available.
     /// </summary>
+    /// <param name="position">The position the enemy should be instantiated at.</param>
+    /// <param name="rotation">The Vector3 rotation to be applied to the instantiated enemy.</param>
+    /// <param name="type">The type of enemy that you want to retrieve.</param>
+    /// <returns>A new instance of Enemy.</returns>
+    public Enemy Get(Vector3 position, Vector3 rotation, EEnemy type)
+    {
+        Enemy result = Get(position, type);
+        result.transform.SetPositionAndRotation(result.transform.position, Quaternion.Euler(rotation.x, rotation.y, rotation.z));
+        return result;
+    }
+
+    /// <summary>
+    /// Retrieves an enemy from the pool if there's any available, and instantiates a new one if none are available.
+    /// </summary>
     /// <param name="type">The type of enemy that you want to retrieve.</param>
     /// <returns>A new instance of Enemy.</returns>
     public override Enemy Get(EEnemy type)

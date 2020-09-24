@@ -1,0 +1,16 @@
+#Test comment
+
+::
+Test invalid line
+Test:
+Test:invalid line
+Test::
+Test:invalid:type
+Test:A20g:
+Test:A20g:invalid coordinates
+Test:C47a:invalid,coordinates
+Test:A20g:bad,coordinate,data
+Test:a20g:0,0,0
+Test:c47a:0,5,1
+Test:C47a:0,0,0
+Test:A20g:0,5.5,1
