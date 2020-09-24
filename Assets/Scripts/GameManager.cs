@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     // object declaration and init
     [SerializeField] private GameObject Player;
     protected GameManager() { }
-    private static GameManager _instance = null;
+    private static GameManager instance;
     public event StateHandler OnStateChange;
 
     // our game state enum interaction for the manager
@@ -38,19 +38,19 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (GameManager._instance == null)
+            if (instance == null)
             {
-                DontDestroyOnLoad(GameManager._instance);
-                GameManager._instance = new GameManager();
+                DontDestroyOnLoad(instance);
+                instance = new GameManager();
             }
-            return GameManager._instance;
+            return instance;
         }
     }
 
     // function to set state
     public void SetState(GameState state)
     {
-        this.gameState = state;
+        gameState = state;
         this.OnStateChange(); // callback on state change
     }
 
@@ -60,13 +60,13 @@ public class GameManager : MonoBehaviour
         // some initial values
         _timeMs = _score = 0;
         _difficulty = 1;
-        this.MakePlayer(); // calls the make player function
+        MakePlayer(); // calls the make player function
     }
 
     // unity on exit function
     void Exit()
     {
-        GameManager._instance = null;
+        instance = null;
     }
 
     private void MakePlayer()
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         // if game is paused keep player
         else
         {
-            _instance = this;
+            Player.Instance = this;
             DontDestroyOnLoad(Player);
         }
     }
@@ -138,12 +138,12 @@ public class GameManager : MonoBehaviour
     // constantly checks the game state to see if the menu is up
     void Update()
     {
-        if (this.gameState == GameState.MENU) // change this to when the menu opens or closes
+        if (gameState == GameState.MENU) // change this to when the menu opens or closes
         {
             Time.timeScale = 0;
 
         }
-        if (this.gameState == GameState.PLAYING)
+        if (gameState == GameState.PLAYING)
         {
             Time.timeScale = 1;
         }
