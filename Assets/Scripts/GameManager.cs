@@ -15,10 +15,9 @@ public delegate void StateHandler();
 public class GameManager : MonoBehaviour
 {
     // object declaration and init
+    [SerializeField] private GameObject Player;
     protected GameManager() { }
     private static GameManager _instance = null;
-    public EnemySpawnManager enemySpawnManager;
-    public GameObject player;
     public event StateHandler OnStateChange;
 
     // our game state enum interaction for the manager
@@ -32,7 +31,7 @@ public class GameManager : MonoBehaviour
     private int _score;
     private int _timeMs;
     private int _difficulty;
-    private int _numEnemies;
+    private int _enemyWaveId;
 
     // creates the game manager instance
     public static GameManager Instance
@@ -73,42 +72,41 @@ public class GameManager : MonoBehaviour
     private void MakePlayer()
     {
         // if game is not playing then remove player
-        if (GameObject.player == null)
+        if (Player == null)
         {
-            Destroy(GameObject.player);
+            Destroy(Player);
         }
         // if game is paused keep player
         else
         {
             instance = this;
-            DontDestroyOnLoad(GameObject.player);
+            DontDestroyOnLoad(Player);
         }
     }
 
     // spawns wave from enemy spawn manager
     private void SpawnEnemy()
     {
-        enemySpawnManager.SpawnWave(_numEnemies);
-        _numEnemies++;
+        EnemySpawnManager.instance.SpawnWave(_enemyWaveId.ToString());
+        _enemyWaveId++;
     }
 
-    // adjusts game manager parameters and adjusts 
-    private void KilledEnemy()
+    // called from enemy class when player kills enemy
+    private void PlayerKilledEnemy()
     {
-        _numEnemies--;
         _score++;
     }
 
     // sets game state to menu/paused
     private void PauseGame()
     {
-        SetState(1);
+        SetState(GameState.MENU);
     }
 
     // sets game state to active/playing
     private void ContinueGame()
     {
-        SetState(0);
+        SetState(GameState.PLAYING);
     }
 
     // getter and setter for score
