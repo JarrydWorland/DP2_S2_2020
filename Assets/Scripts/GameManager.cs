@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         // if game is paused keep player
         else
         {
-            instance = this;
+            _instance = this;
             DontDestroyOnLoad(Player);
         }
     }
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     // spawns wave from enemy spawn manager
     private void SpawnEnemy()
     {
-        EnemySpawnManager.instance.SpawnWave(_enemyWaveId.ToString());
+        EnemySpawnManager.Instance.SpawnWave(_enemyWaveId.ToString());
         _enemyWaveId++;
     }
 
