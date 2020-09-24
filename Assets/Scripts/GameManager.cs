@@ -2,31 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// enum so the game manager can easily reference and set the game state
 public enum GameState
 {
     PLAYING,
     MENU
 }
 
+// state change callback method
 public delegate void StateHandler();
 
 public class GameManager : MonoBehaviour
 {
+    // object declaration and init
     protected GameManager() { }
     private static GameManager _instance = null;
+    public EnemySpawnManager enemySpawnManager;
+    public GameObject player;
     public event StateHandler OnStateChange;
 
+    // our game state enum interaction for the manager
     public GameState gameState
     {
         get;
         private set;
     }
 
+    // class internal variable declaration
     private int _score;
     private int _timeMs;
-    private int _diff;
+    private int _difficulty;
     private int _numEnemies;
 
+    // creates the game manager instance
     public static GameManager Instance
     {
         get
@@ -40,18 +48,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // function to set state
     public void SetState(GameState state)
     {
         this.gameState = state;
-        OnStateChange();
+        this.OnStateChange(); // callback on state change
     }
 
+    // unity start function
     void Start()
     {
+        // some initial values
         _timeMs = _score = 0;
-        MakePlayer();
+        _difficulty = 0;
+        this.MakePlayer(); // calls the make player function
     }
 
+    // unity on exit function
     void Exit()
     {
         GameManager._instance = null;
@@ -60,41 +73,45 @@ public class GameManager : MonoBehaviour
     private void MakePlayer()
     {
         // if game is not playing then remove player
-        if (Player.instance == null)
+        if (GameObject.player == null)
         {
-            Destroy(Player.instance);
+            Destroy(GameObject.player);
         }
         // if game is paused keep player
         else
         {
-            _instance = this;
-            DontDestroyOnLoad(Player.instance);
+            instance = this;
+            DontDestroyOnLoad(GameObject.player);
         }
     }
 
+    // spawns wave from enemy spawn manager
     private void SpawnEnemy()
     {
-        Enemy.instance = new Enemy();
+        enemySpawnManager.SpawnWave(_numEnemies);
         _numEnemies++;
     }
 
+    // adjusts game manager parameters and adjusts 
     private void KilledEnemy()
     {
-        Destroy(Enemy.instance);
         _numEnemies--;
         _score++;
     }
 
+    // sets game state to menu/paused
     private void PauseGame()
     {
-        SetState((GameState)1);
+        SetState(1);
     }
 
+    // sets game state to active/playing
     private void ContinueGame()
     {
-        SetState((GameState)0);
+        SetState(0);
     }
 
+    // getter and setter for score
     public int Score
     {
         get
@@ -107,6 +124,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // getter and setter for time
     public int TimeMs
     {
         get
@@ -119,6 +137,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // constantly checks the game state to see if the menu is up
     void Update()
     {
         if (this.gameState == GameState.MENU) // change this to when the menu opens or closes
@@ -132,7 +151,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // default 0.02s period (50 tick)
+    // default 0.02s period (50 tick) to suss out the difficulty with respect to time
     void FixedUpdate()
     {
         _timeMs = _timeMs + 20;
