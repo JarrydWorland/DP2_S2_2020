@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// enum so the game manager can easily reference and set the game state
 public enum GameState
 {
     PLAYING,
     MENU
 }
 
+// state change callback method
 public delegate void StateHandler();
 
 public class GameManager : MonoBehaviour
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
         private set;
     }
 
+    // class internal variable declaration
     private int _score;
     private int _timeMs;
     private int _difficulty;
