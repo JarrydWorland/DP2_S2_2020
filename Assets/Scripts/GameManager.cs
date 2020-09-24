@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 {
     protected GameManager() { }
     private static GameManager _instance = null;
+    public EnemySpawnManager _enemySpawnManager;
     public event StateHandler OnStateChange;
 
     public GameState gameState
@@ -78,13 +79,13 @@ public class GameManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Enemy.instance = new Enemy();
+
+        _enemySpawnManager.SpawnWaveData();
         _numEnemies++;
     }
 
     private void KilledEnemy()
     {
-        Destroy(Enemy.instance);
         _numEnemies--;
         _score++;
     }
