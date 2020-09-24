@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     private int _score;
     private int _timeMs;
-    private int _diff;
+    private int _difficulty;
     private int _numEnemies;
 
     public static GameManager Instance
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _timeMs = _score = 0;
+        _difficulty = 0;
         MakePlayer();
     }
 
