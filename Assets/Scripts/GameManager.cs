@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         // if game is paused keep player
         else
         {
-            Player.Instance = this;
+            instance = this;
             DontDestroyOnLoad(Player);
         }
     }
