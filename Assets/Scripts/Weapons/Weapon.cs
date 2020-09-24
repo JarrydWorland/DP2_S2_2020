@@ -7,13 +7,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private uint cooldown;
 
+
     //Non-Serialized Fields------------------------------------------------------------------------
 
     private uint timer;
 
     //Initialisation Methods-------------------------------------------------------------------------------------------------------------------------
 
-    private void Start()
+    private void Awake()
     {
         ResetCooldown();
     }
@@ -42,9 +43,10 @@ public class Weapon : MonoBehaviour
     /// <summary>
     /// Shoots the weapon.
     /// </summary>
-    private void Shoot()
+    public void Shoot()
     {
-        Instantiate(projectile, transform.position, transform.parent.rotation, transform.parent);
+        Instantiate(projectile, transform.parent.position, transform.parent.rotation, transform.parent);
+        Debug.Log("Fired");
         ResetCooldown();
     }
 
