@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         // if game is paused keep player
         else
         {
-            instance = this;
+            _instance = this;
             DontDestroyOnLoad(Player.instance);
         }
     }
@@ -87,12 +87,12 @@ public class GameManager : MonoBehaviour
 
     private void PauseGame()
     {
-        SetState(1);
+        SetState((GameState)1);
     }
 
     private void ContinueGame()
     {
-        SetState(0);
+        SetState((GameState)0);
     }
 
     public int Score
