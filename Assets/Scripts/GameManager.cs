@@ -12,7 +12,7 @@ public delegate void StateHandler();
 
 public class GameManager : MonoBehaviour
 {
-    protected GameManager() {}
+    protected GameManager() { }
     private static GameManager _instance = null;
     public event StateHandler OnStateChange;
 
@@ -31,12 +31,12 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (GameManager.instance == null)
+            if (GameManager._instance == null)
             {
-                DontDestroyOnLoad(GameManager.instance);
-                GameManager.instance = new GameManager();
+                DontDestroyOnLoad(GameManager._instance);
+                GameManager._instance = new GameManager();
             }
-            return GameManager.instance;
+            return GameManager._instance;
         }
     }
 
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     void Exit()
     {
-        GameManager.instance = null;
+        GameManager._instance = null;
     }
 
     private void MakePlayer()
@@ -137,12 +137,12 @@ public class GameManager : MonoBehaviour
     {
         _timeMs = _timeMs + 20;
 
-        if(_timeMs % 10000 == 0)
+        if (_timeMs % 10000 == 0)
         {
             _difficulty++;
         }
 
-        if(_timeMs % (10000/_difficulty) == 0)
+        if (_timeMs % (10000 / _difficulty) == 0)
         {
             SpawnEnemy();
         }
