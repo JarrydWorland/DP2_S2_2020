@@ -1,0 +1,20 @@
+# This is a comment.
+# Note: if line is empty, will register as invalid.
+# Format is "Wave ID:Enemy type as a value of EEnemy:Position x coordinate,position y coordinate,position.z coordinate". 
+# Position coordinates should have no spaces between them.
+# 
+# Example lines:
+#	Test:A20g:0,0,0
+#	Test:C47a:0,5,0
+# 
+Test:A20g:-6,1.25,0
+Test:A20g:-6,0.5,0
+Test:A20g:-6,-0.5,0
+Test:A20g:-6,-1.25,0
+Test:A20g:-7,-3,0
+Test:A20g:-7,-2.25,0
+Test:A20g:-7,2.25,0
+Test:A20g:-7,3,0
+Test:C47a:-7,1.25,0
+Test:C47a:-7,0,0
+Test:C47a:-7,-1.25,0

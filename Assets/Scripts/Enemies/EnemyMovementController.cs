@@ -26,7 +26,7 @@ public class EnemyMovementController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        movement = new Vector3(0, -speed, 0);
+        movement = new Vector3(0, speed, 0);
         enemy = GetComponent<Enemy>();
     }
 

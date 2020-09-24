@@ -23,7 +23,7 @@ public class EnemyShootingController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        //weapon = GetComponent<Weapon>();
+        //weapon = GetComponentInChildren<Weapon>();
     }
 
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------

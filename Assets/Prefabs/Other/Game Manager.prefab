@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2490284052925761360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2490284052925761361}
+  - component: {fileID: 2490284052925761362}
+  - component: {fileID: 2490284052925761363}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2490284052925761361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490284052925761360}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -50, y: 0, z: -100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2490284052925761362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490284052925761360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd4faa9a4ad25840962de5d0377d0a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productEnums: 0100000002000000
+  productPrefabs:
+  - {fileID: 6972246613436369873, guid: d2a227ab11f7b964cb7b58ca49d3f7ce, type: 3}
+  - {fileID: 3976904104528329338, guid: fbc2d5e8e8c1590439d38f19a6a29c04, type: 3}
+  productQuantities: 1400000014000000
+  destroyPooledObjects: 0
+  deactivatePooledObjects: 1
+--- !u!114 &2490284052925761363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490284052925761360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7436d53d2904bf479df1626cc0e7982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveDataFile: {fileID: 4900000, guid: 704e78af8041b094b819f3bd730d07d2, type: 3}
+  spawnRotation: {x: 0, y: 0, z: -90}
