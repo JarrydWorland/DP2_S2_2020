@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     {
         // some initial values
         _timeMs = _score = 0;
-        _difficulty = 0;
+        _difficulty = 1;
         this.MakePlayer(); // calls the make player function
     }
 
