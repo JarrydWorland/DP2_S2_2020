@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf43ce7b7c0f39a4abbbed95dfb0530d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile: {fileID: 1543964655909783802, guid: cafa99cf9e305304cae27194d732d834,
+    type: 3}
+  cooldown: 0.5

@@ -4,13 +4,12 @@ public class Weapon : MonoBehaviour
 {
     //Private Fields---------------------------------------------------------------------------------------------------------------------------------
 
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private uint cooldown;
-
+    [SerializeField] private Projectile projectile;
+    [SerializeField] private float cooldown;
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
-    private uint timer;
+    private float timer;
 
     //Initialisation Methods-------------------------------------------------------------------------------------------------------------------------
 
@@ -26,7 +25,7 @@ public class Weapon : MonoBehaviour
         //Decrement cooldown
         if (timer > 0)
         {
-            timer--;
+            timer -= Time.deltaTime;
         }
     }
 
@@ -37,7 +36,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     public bool CanShoot()
     {
-        return timer == 0;
+        return timer <= 0;
     }
 
     /// <summary>
@@ -45,8 +44,8 @@ public class Weapon : MonoBehaviour
     /// </summary>
     public void Shoot()
     {
-        Instantiate(projectile, transform.parent.position, transform.parent.rotation, transform.parent);
-        Debug.Log("Fired");
+        Instantiate(projectile, transform.parent.position, transform.parent.rotation);
+        //Debug.Log("Fired");
         ResetCooldown();
     }
 

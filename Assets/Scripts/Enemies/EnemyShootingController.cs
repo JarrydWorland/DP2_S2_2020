@@ -11,7 +11,11 @@ public class EnemyShootingController : MonoBehaviour
 
     //Serialized Fields----------------------------------------------------------------------------
 
+
+
     //Non-Serialized Fields------------------------------------------------------------------------
+
+    private Weapon weapon;
 
     //private Weapon weapon;
 
@@ -23,7 +27,7 @@ public class EnemyShootingController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        //weapon = GetComponentInChildren<Weapon>();
+        weapon = GetComponentInChildren<Weapon>();
     }
 
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
@@ -43,20 +47,20 @@ public class EnemyShootingController : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
-        if (IsReadyToShoot())
+        if (weapon.CanShoot() && WantToShoot())
         {
-            //weapon.Shoot();
+            weapon.Shoot();
         }
     }
 
     /// <summary>
-    /// Checks if the enemy wants to shoot at the player and is ready to shoot at the player.
+    /// Checks if the enemy wants to shoot at the player.
     /// </summary>
-    /// <returns>Whether the enemy will shoot at the player or not.</returns>
-    private bool IsReadyToShoot()
+    /// <returns>Whether the enemy wants to shoot at the player or not.</returns>
+    private bool WantToShoot()
     {
-        //TODO: check if cooldown of weapon between shots is finished.
-        //TODO: if cooldown finished, check if want to shoot
-        return false;
+        //return true;
+        float deltaY = transform.position.y - Player_Movement.Instance.transform.position.y;
+        return deltaY > -5 && deltaY < 5;
     }
 }

@@ -4,8 +4,8 @@ public class Projectile : MonoBehaviour
 {
     //Private Fields---------------------------------------------------------------------------------------------------------------------------------
 
-    [SerializeField] private float speed = 5;
-    private float timeout = 150;
+    [SerializeField] private float speed;
+    [SerializeField] private float timeout;
 
     //Recurring Methods (Update())-------------------------------------------------------------------------------------------------------------------
 
@@ -15,21 +15,23 @@ public class Projectile : MonoBehaviour
         Debug.Log("Created");
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.position += transform.right * speed * Time.deltaTime;
-        timeout -= 1;
+        transform.position += transform.right * speed * Time.fixedDeltaTime;
+        timeout -= Time.fixedDeltaTime;
         //Debug.Log(timeout);
         if (timeout <= 1)
+        {
             Debug.Log("Death");
-            Destroy(this);
+            Destroy(this.gameObject);
+        }
     }
 
     //Triggered Methods------------------------------------------------------------------------------------------------------------------------------
 
     private void OnBecameInvisible()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
 }
