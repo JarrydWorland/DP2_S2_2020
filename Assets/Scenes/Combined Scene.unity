@@ -395,6 +395,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5121461154629456108, guid: 7a287cffb50642f4b9928dcd7b22b00f,
+        type: 3}
+      propertyPath: productEnums.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121461154629456108, guid: 7a287cffb50642f4b9928dcd7b22b00f,
+        type: 3}
+      propertyPath: productPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121461154629456108, guid: 7a287cffb50642f4b9928dcd7b22b00f,
+        type: 3}
+      propertyPath: productQuantities.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121461154629456108, guid: 7a287cffb50642f4b9928dcd7b22b00f,
+        type: 3}
+      propertyPath: productEnums.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121461154629456108, guid: 7a287cffb50642f4b9928dcd7b22b00f,
+        type: 3}
+      propertyPath: productEnums.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121461154629456108, guid: 7a287cffb50642f4b9928dcd7b22b00f,
+        type: 3}
+      propertyPath: destroyPooledObjects
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121461154629456108, guid: 7a287cffb50642f4b9928dcd7b22b00f,
+        type: 3}
+      propertyPath: productPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2755646262581560941, guid: a2e8837f943a74347bce04ab6f822832,
+        type: 3}
+    - target: {fileID: 5121461154629456108, guid: 7a287cffb50642f4b9928dcd7b22b00f,
+        type: 3}
+      propertyPath: productPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2264422960056385704, guid: c72fce23d882d31439cb8e78d57f7ad9,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a287cffb50642f4b9928dcd7b22b00f, type: 3}
 --- !u!1001 &2878919656491979278

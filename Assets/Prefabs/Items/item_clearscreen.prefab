@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a842e2fb2cb7a34b8a64e3ad8f1a6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   itemCharges: 1
   itemName: Big Bang
   itemDescription: Clears the whole screen of enemies
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: d5c117b44b907de4a82351feee548598, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

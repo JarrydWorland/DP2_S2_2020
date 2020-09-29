@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ecc18816c52ac489f7a87dc142f89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
   itemCharges: 1
   itemName: Heal
   itemDescription: 'Heals the player '
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: f4de8e1f639fc2c47bc4e66c9e7f7f97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

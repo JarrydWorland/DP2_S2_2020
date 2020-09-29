@@ -13,6 +13,7 @@ public class Item : MonoBehaviour
 
 	//Serialized Fields----------------------------------------------------------------------------
 
+    [SerializeField] private EItem type;
 	[SerializeField] private int itemCharges;
 	[SerializeField] private string itemName;
 	[SerializeField] private string itemDescription;
@@ -24,18 +25,10 @@ public class Item : MonoBehaviour
 
 	//Basic Public Properties----------------------------------------------------------------------
 
-	public int GetItemCharges()
-	{
-		return itemCharges;
-	}
-	public string GetItemName()
-	{
-		return itemName;
-	}
-	public string GetItemDescription()
-	{
-		return itemDescription;
-	}
+	public int Charges { get => itemCharges; }
+	public string Description { get => itemDescription; }
+	public string Name { get => itemName; }
+    public EItem Type { get => type; }
 	
     //Complex Public Properties--------------------------------------------------------------------
 
@@ -65,7 +58,7 @@ public class Item : MonoBehaviour
 		if (other.gameObject.CompareTag("Player"))
 		{
 			//TODO Create new copy in players inventory
-			Destroy(gameObject);
+			ItemFactory.Instance.Destroy(this, type);
 		}
 	}
 }
