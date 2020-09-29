@@ -16,10 +16,16 @@ public class Enemy : MonoBehaviour
     private EnemyHealthController healthController;
     private EnemyMovementController movementController;
     private EnemyShootingController shootingController;
+    private EItem itemDrop;
 
     //Public Properties------------------------------------------------------------------------------------------------------------------------------
 
     //Basic Public properties----------------------------------------------------------------------
+
+    /// <summary>
+    /// The item this enemy should drop if the player kills it.
+    /// </summary>
+    public EItem ItemDrop { get => itemDrop; set => itemDrop = value; }
 
     /// <summary>
     /// The enemy's EnemyHealthController component.

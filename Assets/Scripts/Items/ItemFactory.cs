@@ -10,23 +10,12 @@ public class ItemFactory : Factory<ItemFactory, Item, EItem>
     //Triggered Methods------------------------------------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// Get a random item at a specified position.
+    /// Get a random item type, with a 50% chance of returning EItem.None.
     /// </summary>
-    /// <param name="position">The position to spawn the item at.</param>
-    /// <returns>A random item.</returns>
-    public Item GetRandomItem(Vector3 position)
+    /// <returns>The EItem value corresponding to a random type of Item.</returns>
+    public EItem GetRandomItemType()
     {
         List<EItem> keys = new List<EItem>(prefabs.Keys);
-        return Get(position, keys[Random.Range(0, keys.Count)]);
-    }
-
-    /// <summary>
-    /// Get a random item,
-    /// </summary>
-    /// <returns>A random item.</returns>
-    public Item GetRandomItem()
-    {
-        List<EItem> keys = new List<EItem>(prefabs.Keys);
-        return Get(keys[Random.Range(0, keys.Count)]);
+        return Random.Range(0, 2) == 0 ? EItem.None : keys[Random.Range(0, keys.Count)];
     }
 }

@@ -56,7 +56,6 @@ public class EnemyHealthController : MonoBehaviour
     {
         if (health.IsDead)
         {
-            ItemFactory.Instance.GetRandomItem(transform.position);
             EnemyFactory.Instance.Destroy(enemy, enemy.Type);
         }
     }
