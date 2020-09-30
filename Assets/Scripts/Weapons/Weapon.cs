@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     public void Shoot()
     {
-        Instantiate(projectile, transform.parent.position, transform.parent.rotation);
+        Instantiate(projectile, transform.position, transform.parent.rotation);
         //Debug.Log("Fired");
         ResetCooldown();
     }
