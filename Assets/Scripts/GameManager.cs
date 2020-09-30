@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
         {
             if (instance == null)
             {
-                DontDestroyOnLoad(instance);
                 instance = new GameManager();
             }
             return instance;
@@ -51,7 +50,7 @@ public class GameManager : MonoBehaviour
     public void SetState(GameState state)
     {
         gameState = state;
-        this.OnStateChange(); // callback on state change
+        OnStateChange?.Invoke(); // callback on state change
     }
 
     // unity start function
@@ -98,15 +97,17 @@ public class GameManager : MonoBehaviour
     }
 
     // sets game state to menu/paused
-    private void PauseGame()
+    public void PauseGame()
     {
         SetState(GameState.MENU);
+        Time.timeScale = 0.0f;
     }
 
     // sets game state to active/playing
-    private void ContinueGame()
+    public void ContinueGame()
     {
         SetState(GameState.PLAYING);
+        Time.timeScale = 1.0f;
     }
 
     // getter and setter for score
@@ -132,20 +133,6 @@ public class GameManager : MonoBehaviour
         set
         {
             _timeMs = value;
-        }
-    }
-
-    // constantly checks the game state to see if the menu is up
-    void Update()
-    {
-        if (gameState == GameState.MENU) // change this to when the menu opens or closes
-        {
-            Time.timeScale = 0;
-
-        }
-        if (gameState == GameState.PLAYING)
-        {
-            Time.timeScale = 1;
         }
     }
 
