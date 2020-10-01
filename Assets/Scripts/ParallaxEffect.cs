@@ -1,27 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class ParallaxEffect : MonoBehaviour
 {
-    private float length, initPos;
-    public GameObject cam;
-    public float parallaxEffectAmount;
+    private BoxCollider2D boxCollider;
+    private Rigidbody2D rigidBody;
+    private float width;
+    public float speed = -8f;
+
+    //private float length, initPos;
+    //public GameObject cam;
+    //public float parallaxEffectAmount;
 
     void Start()
     {
-        initPos = transform.position.x;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        boxCollider = GetComponent<BoxCollider2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
+        width = boxCollider.size.x;
+        rigidBody.velocity = new Vector2(speed, 0);
+
+        //initPos = transform.position.x;
+        //length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     void Update()
     {
-        float temp = (cam.transform.position.x * (1 - parallaxEffectAmount));
-        float dist = (cam.transform.position.x * parallaxEffectAmount);
+        if (transform.position.x < -width)
+        {
+            Reposition();
+        }
 
-        transform.position = new Vector3(initPos + dist, transform.position.y, transform.position.z);
+        //float temp = (cam.transform.position.x * (1 - parallaxEffectAmount));
+        //float dist = (cam.transform.position.x * parallaxEffectAmount);
 
-        if (temp > initPos + length) initPos += length;
-        else if (temp < initPos - length) initPos -= length;
+        //transform.position = new Vector3(initPos + dist, transform.position.y, transform.position.z);
+
+        //if (temp > initPos + length) initPos += length;
+        //else if (temp < initPos - length) initPos -= length;
+    }
+
+    private void Reposition()
+    {
+        Vector2 vector = new Vector2(width * 2f, 0);
+        transform.position = (Vector2)transform.position + vector;
     }
 }
