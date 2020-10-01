@@ -31,9 +31,8 @@ public class EnemyFactory: Factory<EnemyFactory, Enemy, EEnemy>
     public override Enemy Get(EEnemy type)
     {
         Enemy result = base.Get(type);
+        EnemyManager.Instance.Register(result);
         result.ItemDrop = ItemFactory.Instance.GetRandomItemType();
-        //TODO: if allocating item drops to enemies at random, check if enemy should have an item drop on death, and assign to Enemy.
-        //TODO: register with enemy manager if one gets added?
         return result;
     }
 
@@ -50,7 +49,7 @@ public class EnemyFactory: Factory<EnemyFactory, Enemy, EEnemy>
         }
 
         enemy.ItemDrop = EItem.None;
-        //TODO: deregister from enemy manager if one gets added and Enemy is registered with it.
+        EnemyManager.Instance.DeRegister(enemy);
         base.Destroy(enemy, type);
     }
 }

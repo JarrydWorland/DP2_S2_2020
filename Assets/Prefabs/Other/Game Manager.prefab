@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2490284052925761361}
   - component: {fileID: 2490284052925761362}
+  - component: {fileID: 6809340216634510492}
   - component: {fileID: 2490284052925761363}
   - component: {fileID: 3301338139949976768}
   - component: {fileID: 5121461154629456108}
@@ -53,6 +54,18 @@ MonoBehaviour:
   productQuantities: 1400000014000000
   destroyPooledObjects: 0
   deactivatePooledObjects: 1
+--- !u!114 &6809340216634510492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490284052925761360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f61e7586105aebc42b3cdd6a21d560cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2490284052925761363
 MonoBehaviour:
   m_ObjectHideFlags: 0
