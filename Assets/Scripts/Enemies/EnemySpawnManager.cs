@@ -57,6 +57,7 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
 
             for (int i = 0; i < data.Length; i++)
             {
+                //Get new line, is it commented out?
                 string line = data[i];
 
                 if (line[0] == '#')
@@ -65,20 +66,23 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
                     continue;
                 }
 
+                //Split line, does it have the right number of components?
                 string[] lineData = line.Split(new char[] { ':' });
 
-                if (lineData.Length != 3)
+                if (lineData.Length != 4)
                 {
-                    Debug.LogError($"Wave Data File, line {i + 1}: line must have 3 attributes, has {lineData.Length}. Line is \"{line}\".");
+                    Debug.LogError($"Wave Data File, line {i + 1}: line must have 4 attributes, has {lineData.Length}. Line is \"{line}\".");
                     continue;
                 }
 
+                //Check wave ID
                 if (lineData[0] == "")
                 {
                     Debug.LogError($"Wave Data File, line {i + 1}: wave ID must be specified. Line is \"{line}\".");
                     continue;
                 }
 
+                //Check enemy
                 EEnemy type;
 
                 switch (lineData[1])
@@ -90,17 +94,34 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
                         type = EEnemy.C47a;
                         break;
                     default:
-                        type = EEnemy.None;
-                        break;
+                        Debug.LogError($"Wave Data File, line {i + 1}: enemy type {lineData[1]} is invalid. Line is \"{line}\".");
+                        continue;
                 }
 
-                if (type == EEnemy.None)
+                //Check item type
+                EItem item;
+
+                switch (lineData[2])
                 {
-                    Debug.LogError($"Wave Data File, line {i + 1}: enemy type {lineData[1]} is invalid. Line is \"{line}\".");
-                    continue;
+                    case "None":
+                        item = EItem.None;
+                        break;
+                    case "Random":
+                        item = EItem.Random;
+                        break;
+                    case "Clear Screen":
+                        item = EItem.ClearScreen;
+                        break;
+                    case "Heal":
+                        item = EItem.Heal;
+                        break;
+                    default:
+                        Debug.LogError($"Wave Data File, line {i + 1}: item type {lineData[2]} is invalid. Line is \"{line}\".");
+                        continue;
                 }
 
-                string[] coordinateData = lineData[2].Split(new char[] { ',' });
+                //Check position
+                string[] coordinateData = lineData[3].Split(new char[] { ',' });
 
                 if (coordinateData.Length != 3)
                 {
@@ -126,7 +147,7 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
 
                 if (!validPos)
                 {
-                    Debug.LogError($"Wave Data File, line {i + 1}: could not parse position coordinates \"{lineData[2]}\" as floats. Line is \"{line}\".");
+                    Debug.LogError($"Wave Data File, line {i + 1}: could not parse position coordinates \"{lineData[3]}\" as floats. Line is \"{line}\".");
                     continue;
                 }
 
@@ -134,12 +155,13 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
 
                 //TODO: check that pos is within acceptable bounds
 
+                //Add SpawnData to the dictionary
                 if (!waveData.ContainsKey(lineData[0]))
                 {
                     waveData[lineData[0]] = new List<SpawnData>();
                 }
 
-                waveData[lineData[0]].Add(new SpawnData(type, pos));
+                waveData[lineData[0]].Add(new SpawnData(type, item, pos));
             }
         }
     }
@@ -170,7 +192,7 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
         {
             foreach (SpawnData s in waveData[id])
             {
-                Enemy enemy = EnemyFactory.Instance.Get(s.position, spawnRotation, s.type);
+                Enemy enemy = EnemyFactory.Instance.Get(s.position, spawnRotation, s.type, s.item);
             }
         }
         else

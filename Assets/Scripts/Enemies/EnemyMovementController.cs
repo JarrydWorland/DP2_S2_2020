@@ -53,6 +53,10 @@ public class EnemyMovementController : MonoBehaviour
 
     //Triggered Methods------------------------------------------------------------------------------------------------------------------------------
 
+    /// <summary>
+    /// OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider.
+    /// </summary>
+    /// <param name="collision">The collision data associated with this event.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log($"Collision, me is {collision.otherCollider}, other is {collision.collider}");

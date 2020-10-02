@@ -20,6 +20,7 @@ public class ParallaxEffect : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
         width = boxCollider.size.x;
+        boxCollider.enabled = false;
         rigidBody.velocity = new Vector2(speed, 0);
 
         //initPos = transform.position.x;

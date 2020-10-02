@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 90);
-        Debug.Log("Created");
+        //Debug.Log("Created");
     }
 
     private void FixedUpdate()
@@ -20,18 +20,22 @@ public class Projectile : MonoBehaviour
         transform.position += transform.right * speed * Time.fixedDeltaTime;
         timeout -= Time.fixedDeltaTime;
         //Debug.Log(timeout);
-        if (timeout <= 1)
+        if (timeout <= 0)
         {
-            Debug.Log("Death");
+            //Debug.Log("Death");
             Destroy(this.gameObject);
         }
     }
 
     //Triggered Methods------------------------------------------------------------------------------------------------------------------------------
 
-    private void OnBecameInvisible()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        Destroy(this.gameObject);
+        //Debug.Log($"Collision, other is {collider}");
+        if (collider.tag == "Map Bounds")
+        {
+            //Debug.Log($"Other is Map Bounds");
+            Destroy(gameObject);
+        }
     }
-
 }

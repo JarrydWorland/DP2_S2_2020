@@ -8,6 +8,7 @@ using UnityEngine;
 public enum EItem
 { 
     None,
+    Random,
     Heal,
     ClearScreen
 }

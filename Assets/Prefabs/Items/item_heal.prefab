@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ecc18816c52ac489f7a87dc142f89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   itemCharges: 1
   itemName: Heal
   itemDescription: 'Heals the player '

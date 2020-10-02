@@ -1,16 +1,21 @@
 #Test comment
-
+:
 ::
+:::
 Test invalid line
 Test:
 Test:invalid line
 Test::
 Test:invalid:type
+Test:invalid::
+Test:invalid:type:data
 Test:A20g:
-Test:A20g:invalid coordinates
-Test:C47a:invalid,coordinates
-Test:A20g:bad,coordinate,data
-Test:a20g:0,0,0
-Test:c47a:0,5,1
-Test:C47a:0,0,0
-Test:A20g:0,5.5,1
+Test:A20g:invalid item type
+Test:A20g:None
+Test:A20g:None:invalid coordinates
+Test:C47a:None:invalid,coordinates
+Test:A20g:Random:bad,coordinate,data
+Test:a20g:Heal:0,0,0
+Test:c47a:Clear Screen:0,5,1
+Test:C47a:Random:0,0,0
+Test:A20g:None:0,5.5,1

@@ -15,11 +15,14 @@ public class EnemyFactory: Factory<EnemyFactory, Enemy, EEnemy>
     /// <param name="position">The position the enemy should be instantiated at.</param>
     /// <param name="rotation">The Vector3 rotation to be applied to the instantiated enemy.</param>
     /// <param name="type">The type of enemy that you want to retrieve.</param>
+    /// <param name="type">The type of item the enemy should drop when it dies.</param>
     /// <returns>A new instance of Enemy.</returns>
-    public Enemy Get(Vector3 position, Vector3 rotation, EEnemy type)
+    public Enemy Get(Vector3 position, Vector3 rotation, EEnemy type, EItem item)
     {
-        Enemy result = Get(position, type);
-        result.transform.SetPositionAndRotation(result.transform.position, Quaternion.Euler(rotation.x, rotation.y, rotation.z));
+        Enemy result = Get(type);
+        result.transform.eulerAngles = rotation;
+        result.transform.position = position;
+        result.ItemDrop = item == EItem.Random ? ItemFactory.Instance.GetRandomItemType() : item;
         return result;
     }
 
@@ -32,7 +35,6 @@ public class EnemyFactory: Factory<EnemyFactory, Enemy, EEnemy>
     {
         Enemy result = base.Get(type);
         EnemyManager.Instance.Register(result);
-        result.ItemDrop = ItemFactory.Instance.GetRandomItemType();
         return result;
     }
 

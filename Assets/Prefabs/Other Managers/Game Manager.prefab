@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd45f451263546247a95b6c5cfac37b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEnums: 0100000002000000
+  productEnums: 0200000003000000
   productPrefabs:
   - {fileID: 2264422960056385704, guid: c72fce23d882d31439cb8e78d57f7ad9, type: 3}
   - {fileID: 2755646262581560941, guid: a2e8837f943a74347bce04ab6f822832, type: 3}
