@@ -54,7 +54,7 @@ public class PlayerHealthController : MonoBehaviour
     {
         if (health.IsDead)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
