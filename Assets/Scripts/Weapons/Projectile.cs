@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
     //Private Fields---------------------------------------------------------------------------------------------------------------------------------
 
     [SerializeField] private float speed;
+    [SerializeField] private float damage;
     [SerializeField] private float timeout;
 
     //Recurring Methods (Update())-------------------------------------------------------------------------------------------------------------------
@@ -32,10 +33,15 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //Debug.Log($"Collision, other is {collider}");
-        if (collider.tag == "Map Bounds")
+        //Debug.Log($"this tag: {this.transform.parent.tag}, collider tag: {collider.tag}");
+        if (collider.tag != this.gameObject.tag)
         {
-            //Debug.Log($"Other is Map Bounds");
             Destroy(gameObject);
+
+            if (collider.tag == "Enemy")
+            {
+                collider.gameObject.GetComponent<Enemy>().HealthController.Health.TakeDamage(damage);
+            }
         }
     }
 }

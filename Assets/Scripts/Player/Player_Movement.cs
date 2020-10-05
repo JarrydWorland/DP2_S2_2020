@@ -12,7 +12,7 @@ public class Player_Movement : SerializableSingleton<Player_Movement>
     private float objectHeight;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
@@ -20,7 +20,7 @@ public class Player_Movement : SerializableSingleton<Player_Movement>
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         transform.position += movement * speed;
@@ -30,12 +30,10 @@ public class Player_Movement : SerializableSingleton<Player_Movement>
             //Shoot
             Debug.Log("Pew Pew!");
             Player.GetComponentInChildren<Weapon>().Shoot();
-
         }
-
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         Vector3 viewPos = transform.position;
         viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x + objectWidth, screenBounds.x * -1 - objectWidth);
