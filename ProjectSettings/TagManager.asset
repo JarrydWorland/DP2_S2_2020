@@ -7,6 +7,7 @@ TagManager:
   - Map Bounds
   - Projectile
   - PlayerChar
+  - Enemy
   layers:
   - Default
   - TransparentFX

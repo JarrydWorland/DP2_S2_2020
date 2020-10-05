@@ -38,9 +38,15 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
 
-            if (collider.tag == "Enemy")
+            switch (collider.tag)
             {
-                collider.gameObject.GetComponent<Enemy>().HealthController.Health.TakeDamage(damage);
+                case "Enemy":
+                    collider.gameObject.GetComponent<Enemy>().HealthController.Health.TakeDamage(damage);
+                    break;
+
+                case "Player":
+                    collider.gameObject.GetComponent<PlayerHealthController>().Health.TakeDamage(damage);
+                    break;
             }
         }
     }
