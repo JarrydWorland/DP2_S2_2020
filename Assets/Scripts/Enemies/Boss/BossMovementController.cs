@@ -1,18 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BossMovementController : MonoBehaviour
+/// <summary>
+/// Moves bosses that the player has to shoot down.
+/// </summary>
+public class BossMovementController : EnemyMovementController
 {
-    // Start is called before the first frame update
-    void Start()
+    //Initialization Methods-------------------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// Awake() is run when the script instance is being loaded, regardless of whether or not the script is enabled. 
+    /// Awake() runs before Start().
+    /// </summary>
+    private void Awake()
     {
-        
+        enemy = GetComponent<Boss>();
     }
 
-    // Update is called once per frame
-    void Update()
+    //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// FixedUpdate() is run at a fixed interval independant of framerate.
+    /// </summary>
+    private new void FixedUpdate()
     {
-        
+        movement = CalculateMovement();
+        base.FixedUpdate();
+    }
+
+    /// <summary>
+    /// Calculates the current movement vector.
+    /// </summary>
+    /// <returns>The movement vector</returns>
+    private Vector3 CalculateMovement()
+    {
+        Vector3 vector = new Vector3(0, speed, 0);
+
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            // Follow player
+            float playerX = player.transform.position.x;
+            float myX = this.transform.position.x;
+            float deltaX = playerX - myX;
+
+            vector.x = deltaX;
+        }
+
+        return vector;
     }
 }

@@ -11,12 +11,12 @@ public class EnemyMovementController : MonoBehaviour
 
     //Serialized Fields----------------------------------------------------------------------------
 
-    [SerializeField] private float speed;
+    [SerializeField] protected float speed;
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
-    private Vector3 movement;
-    private Enemy enemy;
+    protected Vector3 movement;
+    protected Enemy enemy;
 
     //Initialization Methods-------------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ public class EnemyMovementController : MonoBehaviour
     /// <summary>
     /// FixedUpdate() is run at a fixed interval independant of framerate.
     /// </summary>
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         Move();
     }
