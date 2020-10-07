@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
-    public int score, highScore;
+    public static int score, highScore;
 
     public Text scoreText, highScoreText, gameOverScoreText;
 
