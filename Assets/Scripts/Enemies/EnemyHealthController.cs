@@ -56,6 +56,7 @@ public class EnemyHealthController : MonoBehaviour
     {
         if (health.IsDead)
         {
+            ScoreManager.instance.AddScore();
             EnemyFactory.Instance.Destroy(enemy, enemy.Type);
         }
     }

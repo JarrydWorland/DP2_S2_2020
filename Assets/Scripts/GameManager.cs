@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     }
 
     // class internal variable declaration
-    private int _score;
     private int _timeMs;
     private int _difficulty;
     private int _enemyWaveId;
@@ -57,8 +56,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // some initial values
-        _timeMs = _score = 0;
+        Time.timeScale = 1.0f;
+        _timeMs = 0;
         _difficulty = 1;
+        ScoreManager.instance.ResetScore();
         MakePlayer(); // calls the make player function
     }
 
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
         // if game is not playing then remove player
         if (Player == null)
         {
+            ScoreManager.instance.ResetScore();
             Destroy(Player);
         }
         // if game is paused keep player
@@ -90,12 +92,6 @@ public class GameManager : MonoBehaviour
         _enemyWaveId++;
     }
 
-    // called from enemy class when player kills enemy
-    private void PlayerKilledEnemy()
-    {
-        _score++;
-    }
-
     // sets game state to menu/paused
     public void PauseGame()
     {
@@ -108,19 +104,6 @@ public class GameManager : MonoBehaviour
     {
         SetState(GameState.PLAYING);
         Time.timeScale = 1.0f;
-    }
-
-    // getter and setter for score
-    public int Score
-    {
-        get
-        {
-            return _score;
-        }
-        set
-        {
-            _score = value;
-        }
     }
 
     // getter and setter for time
