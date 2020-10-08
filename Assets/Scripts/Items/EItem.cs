@@ -10,5 +10,7 @@ public enum EItem
     None,
     Random,
     Heal,
-    ClearScreen
+    ClearScreen,
+    Invincibility,
+    Mirror
 }
