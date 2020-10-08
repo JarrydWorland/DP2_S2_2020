@@ -33,8 +33,8 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //Debug.Log($"Collision, other is {collider}");
-        //Debug.Log($"this tag: {this.transform.parent.tag}, collider tag: {collider.tag}");
-        if (collider.tag != this.gameObject.tag)
+        //Debug.Log($"Projectile collision, this tag: {this.transform.parent.tag}, collider tag: {collider.tag}");
+        if (collider.tag != this.transform.parent.tag)
         {
             Destroy(gameObject);
 
