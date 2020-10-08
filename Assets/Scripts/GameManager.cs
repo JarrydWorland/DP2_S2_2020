@@ -92,12 +92,6 @@ public class GameManager : MonoBehaviour
         _enemyWaveId++;
     }
 
-    // called from enemy class when player kills enemy
-    private void PlayerKilledEnemy()
-    {
-        ScoreManager.instance.AddScore();
-    }
-
     // sets game state to menu/paused
     public void PauseGame()
     {
