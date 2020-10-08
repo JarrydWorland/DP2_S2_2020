@@ -11,5 +11,6 @@ public enum EEnemy
     A20g,
     C47a,
     B24j,
-    P38g
+    P38g,
+    Boss
 }

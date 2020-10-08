@@ -133,6 +133,11 @@ PrefabInstance:
       propertyPath: MainCamera
       value: 
       objectReference: {fileID: 2098631409813680890}
+    - target: {fileID: 6310531389499711206, guid: 756623ee1e5e4da468bd8cae62ec35d3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7299918624401137773, guid: 756623ee1e5e4da468bd8cae62ec35d3,
         type: 3}
       propertyPath: m_Name
@@ -141,12 +146,12 @@ PrefabInstance:
     - target: {fileID: 9147827181110863537, guid: 756623ee1e5e4da468bd8cae62ec35d3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: 8.54
       objectReference: {fileID: 0}
     - target: {fileID: 9147827181110863537, guid: 756623ee1e5e4da468bd8cae62ec35d3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 9147827181110863537, guid: 756623ee1e5e4da468bd8cae62ec35d3,
         type: 3}

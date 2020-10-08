@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     /// Awake() is run when the script instance is being loaded, regardless of whether or not the script is enabled. 
     /// Awake() runs before Start().
     /// </summary>
-    private void Awake()
+    protected void Awake()
     {
         healthController = GetComponent<EnemyHealthController>();
         movementController = GetComponent<EnemyMovementController>();

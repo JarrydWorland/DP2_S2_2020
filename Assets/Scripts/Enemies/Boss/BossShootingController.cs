@@ -1,23 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// Handles whether or not enemies shoot at the player.
+/// Handles whether or not bosses shoot at the player.
 /// </summary>
-public class EnemyShootingController : MonoBehaviour
+public class BossShootingController : MonoBehaviour
 {
-    //Private Fields---------------------------------------------------------------------------------------------------------------------------------
-
-    //Serialized Fields----------------------------------------------------------------------------
-
-    [SerializeField] private float shootingRangeOnYAxis;
-
     //Non-Serialized Fields------------------------------------------------------------------------
 
     private Weapon weapon;
-
-    //private Weapon weapon;
 
     //Initialization Methods-------------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +33,7 @@ public class EnemyShootingController : MonoBehaviour
     //Recurring Methods (Update())--------------------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// Checks the enemy's health, and sends it back to the factory if it's dead.
+    /// Shoots the weapon if it is able to.
     /// </summary>
     private void Shoot()
     {
@@ -54,16 +44,11 @@ public class EnemyShootingController : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks if the enemy wants to shoot at the player.
+    /// Checks if the boss wants to shoot at the player.
     /// </summary>
-    /// <returns>Whether the enemy wants to shoot at the player or not.</returns>
+    /// <returns>Whether the boss wants to shoot at the player or not.</returns>
     private bool WantToShoot()
     {
-        if (GameObject.Find("PlayerChar") != null)
-        {
-            float deltaY = transform.position.y - Player_Movement.Instance.transform.position.y;
-            return deltaY > -shootingRangeOnYAxis && deltaY < shootingRangeOnYAxis;
-        }
-        return false;
+        return true;
     }
 }

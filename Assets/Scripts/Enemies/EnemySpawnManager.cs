@@ -93,6 +93,9 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
                     case "C47a":
                         type = EEnemy.C47a;
                         break;
+                    case "Boss":
+                        type = EEnemy.Boss;
+                        break;
                     default:
                         Debug.LogError($"Wave Data File, line {i + 1}: enemy type {lineData[1]} is invalid. Line is \"{line}\".");
                         continue;
