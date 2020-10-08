@@ -27,5 +27,6 @@ public class item_heal : Item
     public override void UseItem()
     {
         base.UseItem();
+        GameObject.FindWithTag("Player").GetComponent<Health>().Heal(1);
     }
 }
