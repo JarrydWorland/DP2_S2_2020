@@ -9,5 +9,7 @@ public enum EEnemy
 {
     None,
     A20g,
-    C47a
+    C47a,
+    B24j,
+    P38g
 }
