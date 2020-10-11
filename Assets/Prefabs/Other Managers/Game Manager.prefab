@@ -110,10 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd45f451263546247a95b6c5cfac37b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEnums: 0200000003000000
+  productEnums: 02000000030000000400000005000000
   productPrefabs:
   - {fileID: 2264422960056385704, guid: c72fce23d882d31439cb8e78d57f7ad9, type: 3}
   - {fileID: 2755646262581560941, guid: a2e8837f943a74347bce04ab6f822832, type: 3}
-  productQuantities: 0000000000000000
+  - {fileID: 6049304166298152053, guid: 94bbcf1fba18dca4dac412ab146fdb8d, type: 3}
+  - {fileID: 1188104834498048951, guid: 0309b6ca513b6204c8b5d40c424d9739, type: 3}
+  productQuantities: 05000000050000000500000005000000
   destroyPooledObjects: 1
   deactivatePooledObjects: 0

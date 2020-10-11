@@ -124,6 +124,12 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
                     case "Heal":
                         item = EItem.Heal;
                         break;
+                    case "Invincibility":
+                        item = EItem.Invincibility;
+                        break;
+                    case "Mirror":
+                        item = EItem.Mirror;
+                        break;
                     default:
                         Debug.LogError($"Wave Data File, line {i + 1}: item type {lineData[2]} is invalid. Line is \"{line}\".");
                         continue;
