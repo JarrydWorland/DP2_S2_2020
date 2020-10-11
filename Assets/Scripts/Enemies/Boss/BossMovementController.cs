@@ -33,7 +33,7 @@ public class BossMovementController : EnemyMovementController
     /// <returns>The movement vector</returns>
     private Vector3 CalculateMovement()
     {
-        Vector3 vector = new Vector3(0, speed, 0);
+        Vector3 vector = new Vector3(0, onScreenSpeed, 0);
 
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)

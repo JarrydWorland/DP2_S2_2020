@@ -15,6 +15,7 @@ public class EnemyShootingController : MonoBehaviour
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
+    private Enemy enemy;
     private Weapon weapon;
 
     //private Weapon weapon;
@@ -27,6 +28,7 @@ public class EnemyShootingController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        enemy = GetComponent<Enemy>();
         weapon = GetComponentInChildren<Weapon>();
     }
 
@@ -47,7 +49,7 @@ public class EnemyShootingController : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
-        if (weapon.CanShoot() && WantToShoot())
+        if (enemy.IsOnScreen && weapon.CanShoot() && WantToShoot())
         {
             weapon.Shoot();
         }
@@ -64,6 +66,7 @@ public class EnemyShootingController : MonoBehaviour
             float deltaY = transform.position.y - Player_Movement.Instance.transform.position.y;
             return deltaY > -shootingRangeOnYAxis && deltaY < shootingRangeOnYAxis;
         }
+
         return false;
     }
 }

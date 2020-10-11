@@ -1,0 +1,58 @@
+# This is a comment.
+# Note: if line is empty, will register as invalid.
+# Format is "Wave ID:Enemy type as a value of EEnemy:Item type as a value of EItem:Position x coordinate,position y coordinate,position.z coordinate". 
+# Position coordinates should have no spaces between them.
+# 
+# Example lines:
+#	Test:A20g:Clear Screen:0,0,0
+#	Test:C47a:Health:0,5,0
+# 
+# Wave 1: 8 Enemies
+1:C47a:None:-11,1.8,0
+1:C47a:None:-11,0.6,0
+1:C47a:None:-11,-0.6,0
+1:C47a:None:-11,-1.8,0
+1:C47a:None:-12,1.8,0
+1:C47a:Heal:-12,0.6,0
+1:C47a:Heal:-12,-0.6,0
+1:C47a:None:-12,-1.8,0
+#
+# Wave 2: 10 Enemies, building on top of Wave 1
+2:A20g:Random:-11,0.6,0
+2:A20g:Random:-11,-0.6,0
+2:C47a:None:-12,1.8,0
+2:C47a:None:-12,0.6,0
+2:C47a:None:-12,-0.6,0
+2:C47a:None:-12,-1.8,0
+2:C47a:None:-13,1.8,0
+2:C47a:Invincibility:-13,0.6,0
+2:C47a:Mirror:-13,-0.6,0
+2:C47a:None:-13,-1.8,0
+# 
+# Wave 3: 12 Enemies, building on top of Wave 2
+3:A20g:Random:-11,0.6,0
+3:A20g:Random:-11,-0.6,0
+3:C47a:None:-12,1.8,0
+3:C47a:None:-12,0.6,0
+3:C47a:None:-12,-0.6,0
+3:C47a:None:-12,-1.8,0
+3:A20g:Random:-12.5,2.8,0
+3:A20g:Random:-12.5,-2.8,0
+3:C47a:None:-13,1.8,0
+3:C47a:Invincibility:-13,0.6,0
+3:C47a:Mirror:-13,-0.6,0
+3:C47a:None:-13,-1.8,0
+#
+# Wave 4: 16 Enemies
+# 
+# Wave 5: 20 Enemies, building on top of Wave 4
+#
+# Wave 6: 24 Enemies, building on top of Wave 5
+#
+# Wave 7: 32 Enemies
+# 
+# Wave 8: 40 Enemies, building on top of Wave 7
+#
+# Wave 9: 48 Enemies, building on top of Wave 8
+# 
+# Wave 10: 57 Enemies, including the Boss Enemy
