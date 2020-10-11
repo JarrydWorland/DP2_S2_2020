@@ -44,8 +44,44 @@
 3:C47a:None:-13,-1.8,0
 #
 # Wave 4: 16 Enemies
+4:A20g:Heal:-11,0.7,0
+4:A20g:None:-11,0,0
+4:A20g:Heal:-11,-0.7,0
+4:A20g:None:-11.67,1.4,0
+4:A20g:None:-11.67,0.7,0
+4:A20g:Invincibility:-11.67,0,0
+4:A20g:None:-11.67,-0.7,0
+4:A20g:None:-11.67,-1.4,0
+4:B24j:None:-12.67,1.3,0
+4:B24j:Random:-12.67,0,0
+4:B24j:None:-12.67,-1.3,0
+4:B24j:None:-13.67,2.6,0
+4:B24j:Heal:-13.67,1.3,0
+4:B24j:Mirror:-13.67,0,0
+4:B24j:Heal:-13.67,-1.3,0
+4:B24j:None:-13.67,-2.6,0
 # 
 # Wave 5: 20 Enemies, building on top of Wave 4
+5:C47a:Mirror:-11,2.6,0
+5:A20g:Heal:-11,0.7,0
+5:A20g:None:-11,0,0
+5:A20g:Heal:-11,-0.7,0
+5:C47a:Mirror:-11,-2.6,0
+5:A20g:None:-11.67,1.4,0
+5:A20g:None:-11.67,0.7,0
+5:A20g:Invincibility:-11.67,0,0
+5:A20g:None:-11.67,-0.7,0
+5:A20g:None:-11.67,-1.4,0
+5:C47a:Random:-12.67,2.6,0
+5:B24j:None:-12.67,1.3,0
+5:B24j:Random:-12.67,0,0
+5:B24j:None:-12.67,-1.3,0
+5:C47a:Random:-12.67,-2.6,0
+5:B24j:None:-13.67,2.6,0
+5:B24j:Heal:-13.67,1.3,0
+5:B24j:Mirror:-13.67,0,0
+5:B24j:Heal:-13.67,-1.3,0
+5:B24j:None:-13.67,-2.6,0
 #
 # Wave 6: 24 Enemies, building on top of Wave 5
 #

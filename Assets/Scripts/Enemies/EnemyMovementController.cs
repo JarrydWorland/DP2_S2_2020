@@ -13,11 +13,13 @@ public class EnemyMovementController : MonoBehaviour
 
     [SerializeField] protected float onScreenSpeed;
     [SerializeField] protected float offScreenSpeed;
+    [SerializeField] protected float acceleration;
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
     protected Enemy enemy;
     protected Vector3 movement;
+    protected float currentSpeed;
 
     //Initialization Methods-------------------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +30,8 @@ public class EnemyMovementController : MonoBehaviour
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
-        movement = new Vector3(0, offScreenSpeed, 0);
+        currentSpeed = offScreenSpeed;
+        movement = new Vector3(0, currentSpeed, 0);
     }
 
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
@@ -49,9 +52,13 @@ public class EnemyMovementController : MonoBehaviour
     /// </summary>
     public void CheckPosition()
     {
-        if (movement.y != (enemy.IsOnScreen? onScreenSpeed : offScreenSpeed))
+        float targetSpeed = (enemy.IsOnScreen ? onScreenSpeed : offScreenSpeed);
+
+        if (currentSpeed != targetSpeed)
         {
-            movement = new Vector3(0, enemy.IsOnScreen? onScreenSpeed : offScreenSpeed, 0);
+            currentSpeed += acceleration * Time.fixedDeltaTime * (currentSpeed < targetSpeed ? +1 : -1);
+            currentSpeed = Mathf.Clamp(currentSpeed, offScreenSpeed, onScreenSpeed);
+            movement = new Vector3(0, currentSpeed, 0);
         }
     }
 
