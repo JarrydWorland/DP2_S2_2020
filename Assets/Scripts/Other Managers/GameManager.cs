@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 {
     // object declaration and init
     [SerializeField] private GameObject Player;
+    [SerializeField] private int numWaves;
     protected GameManager() { }
     private static GameManager instance;
     public event StateHandler OnStateChange;
@@ -52,13 +53,18 @@ public class GameManager : MonoBehaviour
         OnStateChange?.Invoke(); // callback on state change
     }
 
-    // unity start function
-    void Start()
+    // unity awake function
+    void Awake()
     {
         // some initial values
         Time.timeScale = 1.0f;
         _timeMs = 0;
         _difficulty = 1;
+    }
+
+    // unity start function
+    void Start()
+    {
         ScoreManager.instance.ResetScore();
         MakePlayer(); // calls the make player function
     }
@@ -88,8 +94,8 @@ public class GameManager : MonoBehaviour
     // spawns wave from enemy spawn manager
     private void SpawnEnemy()
     {
-        EnemySpawnManager.Instance.SpawnWave(_enemyWaveId.ToString());
         _enemyWaveId++;
+        EnemySpawnManager.Instance.SpawnWave(_enemyWaveId.ToString());
     }
 
     // sets game state to menu/paused
@@ -129,7 +135,7 @@ public class GameManager : MonoBehaviour
             _difficulty++;
         }
 
-        if (_timeMs % (10000 / _difficulty) == 0)
+        if (numWaves > 0 && _enemyWaveId < numWaves && EnemyManager.Instance.Enemies.Count == 0)
         {
             SpawnEnemy();
         }

@@ -7,6 +7,7 @@ public class BossShootingController : MonoBehaviour
 {
     //Non-Serialized Fields------------------------------------------------------------------------
 
+    private Enemy enemy;
     private Weapon weapon;
 
     //Initialization Methods-------------------------------------------------------------------------------------------------------------------------
@@ -17,6 +18,7 @@ public class BossShootingController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        enemy = GetComponent<Enemy>();
         weapon = GetComponentInChildren<Weapon>();
     }
 
@@ -37,7 +39,7 @@ public class BossShootingController : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
-        if (weapon.CanShoot() && WantToShoot())
+        if (enemy.IsOnScreen && weapon.CanShoot() && WantToShoot())
         {
             weapon.Shoot();
         }
@@ -49,6 +51,6 @@ public class BossShootingController : MonoBehaviour
     /// <returns>Whether the boss wants to shoot at the player or not.</returns>
     private bool WantToShoot()
     {
-        return true;
+        return Player_Movement.Instance != null;
     }
 }

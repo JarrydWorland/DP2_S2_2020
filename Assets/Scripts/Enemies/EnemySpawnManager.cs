@@ -207,6 +207,7 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
         {
             foreach (SpawnData s in waveData[id])
             {
+                //Debug.Log($"Spawning {s.type} at {s.position}");
                 Enemy enemy = EnemyFactory.Instance.Get(s.position, spawnRotation, s.type, s.item);
             }
         }

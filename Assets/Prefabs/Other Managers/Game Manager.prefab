@@ -83,8 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveDataFile: {fileID: 4900000, guid: c8ecd0199cc4a5e4f8f858eca9e796ff, type: 3}
   spawnRotation: {x: 0, y: 0, z: -90}
-  testWaveId: 9
-  testSpawnNow: 1
+  testWaveId: 4
+  testSpawnNow: 0
 --- !u!114 &3301338139949976768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,12 +92,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2490284052925761360}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62072c5f713324b4784f417a436cce4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  numWaves: 10
 --- !u!114 &5121461154629456108
 MonoBehaviour:
   m_ObjectHideFlags: 0

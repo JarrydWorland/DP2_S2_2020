@@ -61,7 +61,7 @@ public class EnemyShootingController : MonoBehaviour
     /// <returns>Whether the enemy wants to shoot at the player or not.</returns>
     private bool WantToShoot()
     {
-        if (GameObject.Find("PlayerChar") != null)
+        if (Player_Movement.Instance != null)
         {
             float deltaY = transform.position.y - Player_Movement.Instance.transform.position.y;
             return deltaY > -shootingRangeOnYAxis && deltaY < shootingRangeOnYAxis;

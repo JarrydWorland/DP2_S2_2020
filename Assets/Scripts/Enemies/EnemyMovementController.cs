@@ -30,8 +30,7 @@ public class EnemyMovementController : MonoBehaviour
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
-        currentSpeed = offScreenSpeed;
-        movement = new Vector3(0, currentSpeed, 0);
+        ResetMovement();
     }
 
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +40,7 @@ public class EnemyMovementController : MonoBehaviour
     /// </summary>
     protected void FixedUpdate()
     {
-        CheckPosition();
+        CalculateMovement();
         Move();
     }
 
@@ -50,7 +49,7 @@ public class EnemyMovementController : MonoBehaviour
     /// <summary>
     /// Checks the current speed of the enemy based on its position.
     /// </summary>
-    public void CheckPosition()
+    protected virtual void CalculateMovement()
     {
         float targetSpeed = (enemy.IsOnScreen ? onScreenSpeed : offScreenSpeed);
 
@@ -85,5 +84,14 @@ public class EnemyMovementController : MonoBehaviour
             //Debug.Log($"Other is Map Bounds");
             EnemyFactory.Instance.Destroy(enemy, enemy.Type);
         }
+    }
+
+    /// <summary>
+    /// Resets the enemy's speed to its speed when it's off-screen.
+    /// </summary>
+    public void ResetMovement()
+    {
+        currentSpeed = offScreenSpeed;
+        movement = new Vector3(0, currentSpeed, 0);
     }
 }

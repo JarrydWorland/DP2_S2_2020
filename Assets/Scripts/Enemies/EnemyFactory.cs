@@ -52,6 +52,8 @@ public class EnemyFactory: Factory<EnemyFactory, Enemy, EEnemy>
 
         enemy.ItemDrop = EItem.None;
         EnemyManager.Instance.DeRegister(enemy);
+        enemy.HealthController.Health.Reset();
+        enemy.MovementController.ResetMovement();
         base.Destroy(enemy, type);
     }
 }

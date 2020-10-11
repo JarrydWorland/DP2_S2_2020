@@ -56,7 +56,7 @@ public class Health : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-		currentHealth = maxHealth;
+        Reset();
 	}
 
 	//Triggered Methods------------------------------------------------------------------------------------------------------------------------------
