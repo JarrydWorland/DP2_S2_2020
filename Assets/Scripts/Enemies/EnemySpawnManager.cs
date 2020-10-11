@@ -90,8 +90,14 @@ public class EnemySpawnManager : SerializableSingleton<EnemySpawnManager>
                     case "A20g":
                         type = EEnemy.A20g;
                         break;
+                    case "B24j":
+                        type = EEnemy.B24j;
+                        break;
                     case "C47a":
                         type = EEnemy.C47a;
+                        break;
+                    case "P38g":
+                        type = EEnemy.P38g;
                         break;
                     case "Boss":
                         type = EEnemy.Boss;

@@ -47,11 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd4faa9a4ad25840962de5d0377d0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEnums: 0100000002000000
+  productEnums: 0100000002000000030000000400000005000000
   productPrefabs:
   - {fileID: 6972246613436369873, guid: d2a227ab11f7b964cb7b58ca49d3f7ce, type: 3}
+  - {fileID: 3733365686920272186, guid: b64e7a54c16add94193cfebcac23b84d, type: 3}
   - {fileID: 3976904104528329338, guid: fbc2d5e8e8c1590439d38f19a6a29c04, type: 3}
-  productQuantities: 1400000014000000
+  - {fileID: 159012144737206523, guid: 495658450e94c6b4e9fcda36714e02d8, type: 3}
+  - {fileID: 1571823661578118263, guid: 673f0660ba48a2044a2e46ad76895042, type: 3}
+  productQuantities: 1400000014000000140000001400000001000000
   destroyPooledObjects: 0
   deactivatePooledObjects: 1
 --- !u!114 &6809340216634510492
