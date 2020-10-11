@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onScreenSpeed: 1
   offScreenSpeed: 0.25
-  acceleration: 0.375
+  acceleration: 0.75
 --- !u!114 &159012144737206502
 MonoBehaviour:
   m_ObjectHideFlags: 0

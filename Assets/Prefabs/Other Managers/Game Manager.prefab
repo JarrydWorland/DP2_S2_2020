@@ -83,7 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveDataFile: {fileID: 4900000, guid: c8ecd0199cc4a5e4f8f858eca9e796ff, type: 3}
   spawnRotation: {x: 0, y: 0, z: -90}
-  testWaveId: 5
+  testWaveId: 9
   testSpawnNow: 1
 --- !u!114 &3301338139949976768
 MonoBehaviour:

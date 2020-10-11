@@ -8,6 +8,21 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float damage;
     [SerializeField] private float timeout;
 
+    //Private Properties-----------------------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// Checks if the enemy is on screen.
+    /// </summary>
+    /// <returns>Is the enemy on screen?</returns>
+    private bool IsOnScreen
+    {
+        get
+        {
+            Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
+            return screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+        }
+    }
+
     //Recurring Methods (Update())-------------------------------------------------------------------------------------------------------------------
 
     private void Awake()
@@ -36,18 +51,20 @@ public class Projectile : MonoBehaviour
         //Debug.Log($"Projectile collision, this tag: {this.transform.parent.tag}, collider tag: {collider.tag}");
         if (collider.tag != this.transform.parent.tag)
         {
-            Destroy(gameObject);
-
-            switch (collider.tag)
+            if (IsOnScreen)
             {
-                case "Enemy":
-                    collider.gameObject.GetComponent<Enemy>().HealthController.Health.TakeDamage(damage);
-                    break;
-
-                case "Player":
-                    collider.gameObject.GetComponent<PlayerHealthController>().Health.TakeDamage(damage);
-                    break;
+                switch (collider.tag)
+                {
+                    case "Enemy":
+                        collider.gameObject.GetComponent<Enemy>().HealthController.Health.TakeDamage(damage);
+                        break;
+                    case "Player":
+                        PlayerHealthController.Instance.Health.TakeDamage(damage);
+                        break;
+                }
             }
+
+            Destroy(gameObject);
         }
     }
 }
