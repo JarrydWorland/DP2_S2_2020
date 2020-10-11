@@ -24,7 +24,7 @@ public class BossMovementController : EnemyMovementController
     private new void FixedUpdate()
     {
         movement = CalculateMovement();
-        base.FixedUpdate();
+        base.MoveBoss();
     }
 
     /// <summary>

@@ -17,6 +17,8 @@ public class EnemyMovementController : MonoBehaviour
 
     protected Vector3 movement;
     protected Enemy enemy;
+    float xOrigin, xOffset, yOrigin, yOffset;
+    float magnitude, frequency;
 
     //Initialization Methods-------------------------------------------------------------------------------------------------------------------------
 
@@ -28,6 +30,14 @@ public class EnemyMovementController : MonoBehaviour
     {
         movement = new Vector3(0, speed, 0);
         enemy = GetComponent<Enemy>();
+        magnitude = Random.Range(0f, 0.5f);
+        frequency = Random.Range(-1f, 2f);
+    }
+
+    private void Start()
+    {
+        xOrigin = this.transform.position.x;
+        yOrigin = this.transform.position.y;
     }
 
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
@@ -37,7 +47,7 @@ public class EnemyMovementController : MonoBehaviour
     /// </summary>
     protected void FixedUpdate()
     {
-        Move();
+        MoveEnemy();
     }
 
     //Recurring Methods (FixedUpdate())--------------------------------------------------------------------------------------------------------------
@@ -45,10 +55,20 @@ public class EnemyMovementController : MonoBehaviour
     /// <summary>
     /// Moves the enemy according to its speed.
     /// </summary>
-    private void Move()
+    protected void MoveBoss()
     {
         //TODO: complex movement
         transform.Translate(movement * Time.deltaTime);
+    }
+
+    private void MoveEnemy()
+    {
+        Vector3 pos = this.transform.position;
+        xOffset -= Time.deltaTime * -speed; // move towards the player
+        yOffset = Mathf.Sin(1 * Mathf.PI * Time.time) * magnitude; // move up and down
+        pos.x = xOrigin + xOffset;
+        pos.y = yOrigin + yOffset;
+        this.transform.position = pos;
     }
 
     //Triggered Methods------------------------------------------------------------------------------------------------------------------------------
