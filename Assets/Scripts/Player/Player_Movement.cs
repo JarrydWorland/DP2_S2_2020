@@ -40,4 +40,18 @@ public class Player_Movement : SerializableSingleton<Player_Movement>
         viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y + objectHeight, screenBounds.y * -1 - objectHeight);
         transform.position = viewPos;
     }
+
+    /// <summary>
+    /// OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider.
+    /// </summary>
+    /// <param name="collision">The collision data associated with this event.</param>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log($"Collision, me is {collision.otherCollider}, other is {collision.collider}");
+
+        if (collision.collider.CompareTag("Item"))
+        {
+            Debug.Log($"Other is Item");
+        }
+    }
 }

@@ -53,11 +53,13 @@ public class Item : MonoBehaviour
 	/// <summary>
 	/// Creates a copy of the item in the players inventory then destroys itself.
 	/// </summary>
-	public void OnCollisionEnter(Collision other)
+	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.CompareTag("Player"))
+        //Debug.Log("Item.OnTriggerEnter2D()");
+
+		if (other.CompareTag("Player"))
 		{
-			//TODO Create new copy in players inventory
+            //TODO Create new copy in players inventory
 			ItemFactory.Instance.Destroy(this, type);
 		}
 	}

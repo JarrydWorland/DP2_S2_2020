@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Monitors the player's health.
 /// </summary>
-public class PlayerHealthController : MonoBehaviour
+public class PlayerHealthController : SerializableSingleton<PlayerHealthController>
 {
     //Private Fields---------------------------------------------------------------------------------------------------------------------------------
 
@@ -30,8 +30,9 @@ public class PlayerHealthController : MonoBehaviour
     /// Awake() is run when the script instance is being loaded, regardless of whether or not the script is enabled.
     /// Awake() runs before Start().
     /// </summary>
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         health = GetComponent<Health>();
     }
 

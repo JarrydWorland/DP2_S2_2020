@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class item_heal : Item
 {
-    
     //Private Fields---------------------------------------------------------------------------------------------------------------------------------
+
+    [SerializeField] private float healthIncrease;
 
     //Serialized Fields----------------------------------------------------------------------------
 
@@ -27,6 +28,6 @@ public class item_heal : Item
     public override void UseItem()
     {
         base.UseItem();
-        GameObject.FindWithTag("Player").GetComponent<Health>().Heal(1);
+        PlayerHealthController.Instance.Health.Heal(healthIncrease);
     }
 }
