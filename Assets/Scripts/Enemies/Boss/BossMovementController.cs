@@ -25,6 +25,7 @@ public class BossMovementController : EnemyMovementController
     {
         movement = CalculateMovement();
         base.MoveBoss();
+        // ^ have adjusted from FixedUpdate to MoveBoss as boss is now moving in a different pattern to regular enemies.
     }
 
     /// <summary>

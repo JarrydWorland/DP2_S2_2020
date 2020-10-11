@@ -34,6 +34,9 @@ public class EnemyMovementController : MonoBehaviour
         frequency = Random.Range(-1f, 2f);
     }
 
+    /// <summary>
+    /// Initiates when script is instantiated. Sets x and y origin for sinusoidal movement.
+    /// </summary>
     private void Start()
     {
         xOrigin = this.transform.position.x;
@@ -53,7 +56,7 @@ public class EnemyMovementController : MonoBehaviour
     //Recurring Methods (FixedUpdate())--------------------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// Moves the enemy according to its speed.
+    /// Moves the boss according to its speed.
     /// </summary>
     protected void MoveBoss()
     {
@@ -61,6 +64,9 @@ public class EnemyMovementController : MonoBehaviour
         transform.Translate(movement * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Moves the enemy sinusoidally and according to speed.
+    /// </summary>
     private void MoveEnemy()
     {
         Vector3 pos = this.transform.position;
