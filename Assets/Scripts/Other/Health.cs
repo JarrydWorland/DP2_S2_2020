@@ -73,6 +73,8 @@ public class Health : MonoBehaviour
         }
 
 		currentHealth -= Mathf.Min(amount, currentHealth);
+		
+		OnHealthChanged?.Invoke(currentHealth);
 	}
 
 	/// <summary>
@@ -87,6 +89,8 @@ public class Health : MonoBehaviour
         }
 
         currentHealth += amount;
+        
+        OnHealthChanged?.Invoke(currentHealth);
 	}
 
     /// <summary>
@@ -95,5 +99,10 @@ public class Health : MonoBehaviour
     public void Reset()
     {
 		currentHealth = maxHealth;
+
+		OnHealthChanged?.Invoke(currentHealth);
     }
+
+    public delegate void HealthEvent(float currentHealth);
+    public event HealthEvent OnHealthChanged;
 }
