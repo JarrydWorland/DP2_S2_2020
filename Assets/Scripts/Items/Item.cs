@@ -59,7 +59,8 @@ public class Item : MonoBehaviour
 
 		if (other.CompareTag("Player"))
 		{
-            //TODO Create new copy in players inventory
+            //TODO Create new copy in players inventory instead of immediately using the item.
+            UseItem();
 			ItemFactory.Instance.Destroy(this, type);
 		}
 	}
