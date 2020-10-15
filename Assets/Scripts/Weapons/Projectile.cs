@@ -4,9 +4,14 @@ public class Projectile : MonoBehaviour
 {
     //Private Fields---------------------------------------------------------------------------------------------------------------------------------
 
-    [SerializeField] private float speed;
-    [SerializeField] private float damage;
-    [SerializeField] private float timeout;
+    [SerializeField]
+    private float speed;
+
+    [SerializeField]
+    private float damage;
+
+    [SerializeField]
+    private float timeout;
 
     //Private Properties-----------------------------------------------------------------------------------------------------------------------------
 
@@ -22,6 +27,10 @@ public class Projectile : MonoBehaviour
             return screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
         }
     }
+
+    // Public Fields --------------------------------------------------------------------------------------------------------------------------------
+
+    public string parentTag;
 
     //Recurring Methods (Update())-------------------------------------------------------------------------------------------------------------------
 
@@ -49,22 +58,19 @@ public class Projectile : MonoBehaviour
     {
         //Debug.Log($"Collision, other is {collider}");
         //Debug.Log($"Projectile collision, this tag: {this.transform.parent.tag}, collider tag: {collider.tag}");
-        if (collider.tag != this.transform.parent.tag)
-        {
-            if (IsOnScreen)
-            {
-                switch (collider.tag)
-                {
-                    case "Enemy":
-                        collider.gameObject.GetComponent<Enemy>().HealthController.Health.TakeDamage(damage);
-                        break;
-                    case "Player":
-                        PlayerHealthController.Instance.Health.TakeDamage(damage);
-                        break;
-                }
-            }
 
-            Destroy(gameObject);
+        if (collider.tag == parentTag) return;
+
+        if (IsOnScreen)
+        {
+            Debug.Log(collider.tag + ", " + parentTag);
+            
+            if (collider.tag == "Enemy" && parentTag == "Player")
+                collider.gameObject.GetComponent<Enemy>().HealthController.Health.TakeDamage(damage);
+            else if (collider.tag == "Player" && parentTag == "Enemy")
+                PlayerHealthController.Instance.Health.TakeDamage(damage);
         }
+
+        Destroy(gameObject);
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1543964655909783802}
   m_Layer: 0
   m_Name: Secondary Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,3 +137,4 @@ MonoBehaviour:
   speed: 10
   damage: 4
   timeout: 15
+  tagName: 
