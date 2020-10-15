@@ -6,7 +6,7 @@ public class item_clearscreen : Item
 {
     
     //Private Fields---------------------------------------------------------------------------------------------------------------------------------
-    [SerializeField] private GameObject explosion;
+
     //Serialized Fields----------------------------------------------------------------------------
 
     //Non-Serialized Fields------------------------------------------------------------------------
@@ -27,6 +27,5 @@ public class item_clearscreen : Item
     public override void UseItem()
     {
         base.UseItem();
-        Instantiate(explosion);
     }
 }
