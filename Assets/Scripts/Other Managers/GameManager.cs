@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     // object declaration and init
     [SerializeField] private GameObject Player;
     [SerializeField] private int numWaves;
+    [SerializeField] private AudioSource musicSource;
     protected GameManager() { }
     private static GameManager instance;
     public event StateHandler OnStateChange;

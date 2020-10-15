@@ -11,6 +11,9 @@ public class PlayerHealthController : SerializableSingleton<PlayerHealthControll
 
     //Serialized Fields----------------------------------------------------------------------------
 
+    [SerializeField] private AudioSource PlayerAudio;
+    [SerializeField] private AudioClip Explosion;
+
     //Non-Serialized Fields------------------------------------------------------------------------
 
     private Health health;
@@ -55,6 +58,8 @@ public class PlayerHealthController : SerializableSingleton<PlayerHealthControll
     {
         if (health.IsDead)
         {
+            PlayerAudio.clip = Explosion;
+            PlayerAudio.Play();
             Destroy(gameObject);
         }
     }
