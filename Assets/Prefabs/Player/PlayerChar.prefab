@@ -125,7 +125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc577e3b0f0f994ba838cfc66bd8b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 0.05
+  CameraAudio: {fileID: 0}
+  WeaponClip: {fileID: 0}
+  MoveClip: {fileID: 0}
+  ExplosionClip: {fileID: 0}
   Player: {fileID: 7299918624401137773}
   MainCamera: {fileID: 0}
 --- !u!114 &4162679580522540776
@@ -140,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365b21b088b94404c8f7b2293d62e3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerAudio: {fileID: 0}
+  Explosion: {fileID: 0}
 --- !u!114 &6406630918321796967
 MonoBehaviour:
   m_ObjectHideFlags: 0

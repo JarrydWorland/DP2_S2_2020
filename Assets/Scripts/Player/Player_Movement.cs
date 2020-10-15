@@ -5,6 +5,10 @@ using UnityEngine;
 public class Player_Movement : SerializableSingleton<Player_Movement>
 {
     [SerializeField] private float speed;
+    [SerializeField] private AudioSource CameraAudio;
+    [SerializeField] private AudioClip WeaponClip;
+    [SerializeField] private AudioClip MoveClip;
+    [SerializeField] private AudioClip ExplosionClip;
     public GameObject Player;
     public Camera MainCamera;
     private Vector3 screenBounds;
@@ -29,6 +33,8 @@ public class Player_Movement : SerializableSingleton<Player_Movement>
         {
             //Shoot
             Debug.Log("Pew Pew!");
+            CameraAudio.clip = WeaponClip;
+            CameraAudio.Play();
             Player.GetComponentInChildren<Weapon>().Shoot();
         }
     }
