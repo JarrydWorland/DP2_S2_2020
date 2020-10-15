@@ -11,15 +11,14 @@ public class EnemyMovementController : MonoBehaviour
 
     //Serialized Fields----------------------------------------------------------------------------
 
-    [SerializeField] protected float onScreenSpeed;
-    [SerializeField] protected float offScreenSpeed;
-    [SerializeField] protected float acceleration;
+    [SerializeField] protected float speed;
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
-    protected Enemy enemy;
     protected Vector3 movement;
-    protected float currentSpeed;
+    protected Enemy enemy;
+    float xOrigin, xOffset, yOrigin, yOffset;
+    float magnitude, frequency;
 
     //Initialization Methods-------------------------------------------------------------------------------------------------------------------------
 
@@ -29,8 +28,19 @@ public class EnemyMovementController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        movement = new Vector3(0, speed, 0);
         enemy = GetComponent<Enemy>();
-        ResetMovement();
+        magnitude = Random.Range(0f, 0.5f);
+        frequency = Random.Range(-1f, 2f);
+    }
+
+    /// <summary>
+    /// Initiates when script is instantiated. Sets x and y origin for sinusoidal movement.
+    /// </summary>
+    private void Start()
+    {
+        xOrigin = this.transform.position.x;
+        yOrigin = this.transform.position.y;
     }
 
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
@@ -40,34 +50,31 @@ public class EnemyMovementController : MonoBehaviour
     /// </summary>
     protected void FixedUpdate()
     {
-        CalculateMovement();
-        Move();
+        MoveEnemy();
     }
 
     //Recurring Methods (FixedUpdate())--------------------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// Checks the current speed of the enemy based on its position.
+    /// Moves the boss according to its speed.
     /// </summary>
-    protected virtual void CalculateMovement()
-    {
-        float targetSpeed = (enemy.IsOnScreen ? onScreenSpeed : offScreenSpeed);
-
-        if (currentSpeed != targetSpeed)
-        {
-            currentSpeed += acceleration * Time.fixedDeltaTime * (currentSpeed < targetSpeed ? +1 : -1);
-            currentSpeed = Mathf.Clamp(currentSpeed, offScreenSpeed, onScreenSpeed);
-            movement = new Vector3(0, currentSpeed, 0);
-        }
-    }
-
-    /// <summary>
-    /// Moves the enemy according to its speed.
-    /// </summary>
-    private void Move()
+    protected void MoveBoss()
     {
         //TODO: complex movement
         transform.Translate(movement * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// Moves the enemy sinusoidally and according to speed.
+    /// </summary>
+    private void MoveEnemy()
+    {
+        Vector3 pos = this.transform.position;
+        xOffset -= Time.deltaTime * -speed; // move towards the player
+        yOffset = Mathf.Sin(1 * Mathf.PI * Time.time) * magnitude; // move up and down
+        pos.x = xOrigin + xOffset;
+        pos.y = yOrigin + yOffset;
+        this.transform.position = pos;
     }
 
     //Triggered Methods------------------------------------------------------------------------------------------------------------------------------
@@ -84,14 +91,5 @@ public class EnemyMovementController : MonoBehaviour
             //Debug.Log($"Other is Map Bounds");
             EnemyFactory.Instance.Destroy(enemy, enemy.Type);
         }
-    }
-
-    /// <summary>
-    /// Resets the enemy's speed to its speed when it's off-screen.
-    /// </summary>
-    public void ResetMovement()
-    {
-        currentSpeed = offScreenSpeed;
-        movement = new Vector3(0, currentSpeed, 0);
     }
 }

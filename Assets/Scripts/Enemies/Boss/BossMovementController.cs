@@ -19,19 +19,34 @@ public class BossMovementController : EnemyMovementController
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
 
     /// <summary>
+    /// FixedUpdate() is run at a fixed interval independant of framerate.
+    /// </summary>
+    private new void FixedUpdate()
+    {
+        movement = CalculateMovement();
+        base.MoveBoss();
+        // ^ have adjusted from FixedUpdate to MoveBoss as boss is now moving in a different pattern to regular enemies.
+    }
+
+    /// <summary>
     /// Calculates the current movement vector.
     /// </summary>
-    protected override void CalculateMovement()
+    /// <returns>The movement vector</returns>
+    private Vector3 CalculateMovement()
     {
-        base.CalculateMovement();
+        Vector3 vector = new Vector3(0, speed, 0);
 
-        if (enemy.IsOnScreen && Player_Movement.Instance != null)
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
         {
             // Follow player
-            float playerX = Player_Movement.Instance.transform.position.y;
-            float myX = transform.position.y;
+            float playerX = player.transform.position.y;
+            float myX = this.transform.position.y;
             float deltaX = myX - playerX;
-            movement.x = deltaX;
+
+            vector.x = deltaX;
         }
+
+        return vector;
     }
 }

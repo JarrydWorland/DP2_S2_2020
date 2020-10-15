@@ -173,9 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed06905f4e619944895369c54150d5d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onScreenSpeed: 0.5
-  offScreenSpeed: 0.25
-  acceleration: 0.0625
+  speed: 1.75
 --- !u!114 &1317117754714568101
 MonoBehaviour:
   m_ObjectHideFlags: 0
