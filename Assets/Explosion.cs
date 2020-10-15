@@ -22,7 +22,7 @@ public class Explosion : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             //reduce enemy hp to zero
-            //other.gameObject.GetComponent<Enemy>().
+            other.gameObject.GetComponent<Enemy>().HealthController.Health.TakeDamage(26);
         }
     }
 }
