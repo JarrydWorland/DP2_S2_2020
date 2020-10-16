@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // enum so the game manager can easily reference and set the game state
 public enum GameState
@@ -139,6 +141,50 @@ public class GameManager : MonoBehaviour
         if (numWaves > 0 && _enemyWaveId < numWaves && EnemyManager.Instance.Enemies.Count == 0)
         {
             SpawnEnemy();
+        }
+
+        if (_enemyWaveId >= numWaves && EnemyManager.Instance.Enemies.Count == 0 || PlayerHealthController.Instance.Health.CurrentHealth == 0)
+        {
+            // https://www.codedojo.com/?p=2155
+            
+            GameObject FindObjectInChildren(GameObject obj, string objectName)
+            {
+                for (int i = 0; i < obj.transform.childCount; i++)
+                {
+                    GameObject childObj = obj.transform.GetChild(i).gameObject;
+                    if (childObj.name == objectName) return childObj;
+                    
+                    GameObject foundObj = FindObjectInChildren(childObj, objectName);
+                    if (foundObj != null) return foundObj;
+                }
+
+                return null;
+            }
+
+            GameObject FindObject(string objectName)
+            {
+                GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+
+                foreach (GameObject obj in rootObjects)
+                {
+                    if (obj.transform.gameObject.name == objectName) return obj.transform.gameObject;
+                    
+                    GameObject foundObj = FindObjectInChildren(obj, objectName);
+                    if (foundObj != null) return foundObj;
+                }
+
+                return null;
+            }
+
+            FindObject("GameOverMenu")?.SetActive(true);
+
+            GameOverMenu gameOverMenu = FindObjectOfType<GameOverMenu>();
+            
+            gameOverMenu.message.text = PlayerHealthController.Instance.Health.CurrentHealth > 0 ? "You win!" : "You lose!";
+            gameOverMenu.highScore.text = "High score: " + ScoreManager.highScore;
+            gameOverMenu.score.text = "Score: " + ScoreManager.score;
+
+            PauseGame();
         }
     }
 }
