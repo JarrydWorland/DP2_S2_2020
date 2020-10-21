@@ -21,6 +21,8 @@ public class Player_Movement : SerializableSingleton<Player_Movement>
         screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
         objectHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
+
+        CloneController cloneController = Player.GetComponent<CloneController>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,11 @@ public class Player_Movement : SerializableSingleton<Player_Movement>
             CameraAudio.clip = WeaponClip;
             CameraAudio.Play();
             Player.GetComponentInChildren<Weapon>().Shoot();
+            if (CloneController.Instance.IsEnabled())
+            {
+                Debug.Log("Clone enabled");
+                CloneController.Instance.clone.GetComponentInChildren<Weapon>().Shoot();
+            }
         }
     }
 

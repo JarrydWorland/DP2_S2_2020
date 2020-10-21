@@ -71,6 +71,9 @@ public class Projectile : MonoBehaviour
                 PlayerHealthController.Instance.Health.TakeDamage(damage);
         }
 
-        Destroy(gameObject);
+        if (collider.tag == "Map Bounds")
+        {
+            Destroy(gameObject);
+        }
     }
 }

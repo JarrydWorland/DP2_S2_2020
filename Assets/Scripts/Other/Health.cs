@@ -11,6 +11,9 @@ public class Health : MonoBehaviour
 {
 	//Private Fields---------------------------------------------------------------------------------------------------------------------------------
 
+	[SerializeField] private bool invincible;
+	private float invicibleTimer = 5;
+	
 	//Serialized Fields----------------------------------------------------------------------------
 
 	[SerializeField] private float maxHealth;
@@ -34,6 +37,25 @@ public class Health : MonoBehaviour
     /// </summary>
     public float MaxHealth { get => maxHealth; }
 
+
+    public void SetInvincible(float timer)
+    {
+	    invincible = true;
+	    invicibleTimer = timer;
+    }
+    public void Update()
+    {
+	    //Decrement cooldown
+	    if (invicibleTimer > 0)
+	    {
+		    invicibleTimer -= Time.deltaTime;
+	    }
+	    else
+	    {
+		    invincible = false;
+	    }
+    }
+
     //Complex Public Properties--------------------------------------------------------------------
 
     /// <summary>
@@ -56,6 +78,7 @@ public class Health : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+	    invincible = false;
         Reset();
 	}
 
@@ -72,8 +95,11 @@ public class Health : MonoBehaviour
             Debug.LogError($"Why is {amount} damage being passed to Health.TakeDamage()? Only a positive value should be passed to TakeDamage().");
         }
 
-		currentHealth -= Mathf.Min(amount, currentHealth);
-		
+        if (!invincible)
+        {
+	        currentHealth -= Mathf.Min(amount, currentHealth);
+        }
+        
 		OnHealthChanged?.Invoke(currentHealth);
 	}
 
