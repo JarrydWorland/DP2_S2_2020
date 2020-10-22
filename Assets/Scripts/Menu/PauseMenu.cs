@@ -5,6 +5,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
 
+    private float _speed;
+
     private bool IsPaused => pauseMenu.activeSelf;
 
     void Update()
@@ -20,12 +22,17 @@ public class PauseMenu : MonoBehaviour
     {
         GameManager.Instance.PauseGame();
         pauseMenu.SetActive(true);
+
+        _speed = Player_Movement.Instance.Speed;
+        Player_Movement.Instance.Speed = 0.0f;
     }
 
     private void Continue()
     {
         pauseMenu.SetActive(false);
         GameManager.Instance.ContinueGame();
+
+        Player_Movement.Instance.Speed = _speed;
     }
 
     public void OnContinueButtonClicked() => Continue();
