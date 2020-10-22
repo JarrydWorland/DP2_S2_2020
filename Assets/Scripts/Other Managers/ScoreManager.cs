@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class ScoreManager : MonoBehaviour
 
     public static int score, highScore;
 
-    public Text scoreText, highScoreText, gameOverScoreText;
+    public TextMeshProUGUI scoreText, highScoreText, gameOverScoreText;
 
     void Awake()
     {
