@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_Movement : SerializableSingleton<Player_Movement>
 {
-    [SerializeField] private float speed;
+    public float Speed;
     [SerializeField] private AudioSource CameraAudio;
     [SerializeField] private AudioClip WeaponClip;
     [SerializeField] private AudioClip MoveClip;
@@ -29,7 +29,7 @@ public class Player_Movement : SerializableSingleton<Player_Movement>
     private void Update()
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        transform.position += movement * speed;
+        transform.position += movement * Speed;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
