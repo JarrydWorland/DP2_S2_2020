@@ -63,12 +63,18 @@ public class Projectile : MonoBehaviour
 
         if (IsOnScreen)
         {
-            Debug.Log(collider.tag + ", " + parentTag);
-            
+            //Debug.Log(collider.tag + ", " + parentTag);
+
             if (collider.tag == "Enemy" && parentTag == "Player")
+            {
                 collider.gameObject.GetComponent<Enemy>().HealthController.Health.TakeDamage(damage);
+                Destroy(gameObject);
+            }
             else if (collider.tag == "Player" && parentTag == "Enemy")
+            {
                 PlayerHealthController.Instance.Health.TakeDamage(damage);
+                Destroy(gameObject);
+            }
         }
 
         if (collider.tag == "Map Bounds")
