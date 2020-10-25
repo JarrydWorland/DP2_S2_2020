@@ -1,0 +1,20 @@
+# This is a comment.
+# Note: if line is empty, will register as invalid.
+# Format is "Wave ID:Enemy type as a value of EEnemy:Item type as a value of EItem:Position x coordinate,position y coordinate,position.z coordinate". 
+# Position coordinates should have no spaces between them.
+# 
+# Example lines:
+#	Test:A20g:Clear Screen:0,0,0
+#	Test:C47a:Health:0,5,0
+# 
+Test:P38g:Random:-6,1.25,0
+Test:A20g:Mirror:-6,0.5,0
+Test:A20g:Mirror:-6,-0.5,0
+Test:P38g:Random:-6,-1.25,0
+Test:A20g:Invincibility:-7,-3,0
+Test:B24j:Heal:-7,-2.25,0
+Test:B24j:Heal:-7,2.25,0
+Test:A20g:Invincibility:-7,3,0
+Test:C47a:Random:-7,1.25,0
+Test:Boss:Clear Screen:-7,0,0
+Test:C47a:Random:-7,-1.25,0

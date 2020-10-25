@@ -12,13 +12,29 @@ public class EnemyFactory: Factory<EnemyFactory, Enemy, EEnemy>
     /// <summary>
     /// Retrieves an enemy from the pool if there's any available, and instantiates a new one if none are available.
     /// </summary>
+    /// <param name="position">The position the enemy should be instantiated at.</param>
+    /// <param name="rotation">The Vector3 rotation to be applied to the instantiated enemy.</param>
+    /// <param name="type">The type of enemy that you want to retrieve.</param>
+    /// <param name="type">The type of item the enemy should drop when it dies.</param>
+    /// <returns>A new instance of Enemy.</returns>
+    public Enemy Get(Vector3 position, Vector3 rotation, EEnemy type, EItem item)
+    {
+        Enemy result = Get(type);
+        result.transform.eulerAngles = rotation;
+        result.transform.position = position;
+        result.ItemDrop = item == EItem.Random ? ItemFactory.Instance.GetRandomItemType() : item;
+        return result;
+    }
+
+    /// <summary>
+    /// Retrieves an enemy from the pool if there's any available, and instantiates a new one if none are available.
+    /// </summary>
     /// <param name="type">The type of enemy that you want to retrieve.</param>
     /// <returns>A new instance of Enemy.</returns>
     public override Enemy Get(EEnemy type)
     {
         Enemy result = base.Get(type);
-        //TODO: if allocating item drops to enemies at random, check if enemy should have an item drop on death, and assign to Enemy.
-        //TODO: register with enemy manager if one gets added?
+        EnemyManager.Instance.Register(result);
         return result;
     }
 
@@ -29,12 +45,13 @@ public class EnemyFactory: Factory<EnemyFactory, Enemy, EEnemy>
     /// <param name="type">The type of the Enemy to be destroyed.</param>
     public override void Destroy(Enemy enemy, EEnemy type)
     {
-        if (enemy.HealthController.Health.IsDead)
+        if (enemy.HealthController.Health.IsDead && enemy.ItemDrop != EItem.None)
         {
-            //TODO: if enemy has an item to drop, alert item drop system 
+            ItemFactory.Instance.Get(enemy.transform.position, enemy.ItemDrop);
         }
 
-        //TODO: deregister from enemy manager if one gets added and Enemy is registered with it.
+        enemy.ItemDrop = EItem.None;
+        EnemyManager.Instance.DeRegister(enemy);
         base.Destroy(enemy, type);
     }
 }

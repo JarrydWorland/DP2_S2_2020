@@ -26,11 +26,14 @@ public class Factory<FactoryType, ProductType, ProductEnum> : SerializableSingle
 
     //Serialized Fields----------------------------------------------------------------------------
 
-    [Header("Pooling")]
-    [SerializeField] protected bool deactivateGameObjectInPool;
+    [Header("Object Pool")]
     [SerializeField] protected List<ProductEnum> productEnums;
     [SerializeField] protected List<ProductType> productPrefabs;
     [SerializeField] protected List<int> productQuantities;
+
+    [Header("Pooling Settings")]
+    [SerializeField] protected bool destroyPooledObjects;
+    [SerializeField] protected bool deactivatePooledObjects;
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
@@ -109,7 +112,7 @@ public class Factory<FactoryType, ProductType, ProductEnum> : SerializableSingle
             result = pool[type][0];
             pool[type].RemoveAt(0);
 
-            if (deactivateGameObjectInPool)
+            if (deactivatePooledObjects)
             {
                 result.gameObject.SetActive(true);
             }
@@ -161,21 +164,28 @@ public class Factory<FactoryType, ProductType, ProductEnum> : SerializableSingle
     /// <param name="type">The type of the [ProductType] to be destroyed.</param>
     public virtual void Destroy(ProductType toDestroy, ProductEnum type)
     {
-        toDestroy.transform.position = objectPool.position;
-        toDestroy.transform.parent = objectPool;
-
-        if (deactivateGameObjectInPool)
+        if (destroyPooledObjects)
         {
-            toDestroy.gameObject.SetActive(false);
-        }
-
-        if (pool.ContainsKey(type))
-        {
-            pool[type].Add(toDestroy);
+            Destroy(toDestroy.gameObject);
         }
         else
         {
-            Debug.LogError($"{this} does not have a list objects of [ProductEnum] value {type}.");
-        }
+            toDestroy.transform.position = objectPool.position;
+            toDestroy.transform.parent = objectPool;
+
+            if (deactivatePooledObjects)
+            {
+                toDestroy.gameObject.SetActive(false);
+            }
+
+            if (pool.ContainsKey(type))
+            {
+                pool[type].Add(toDestroy);
+            }
+            else
+            {
+                Debug.LogError($"{this} does not have a list objects of [ProductEnum] value {type}.");
+            }
+        }        
     }
 }

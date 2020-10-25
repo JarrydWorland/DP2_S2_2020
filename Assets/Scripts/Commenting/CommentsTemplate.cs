@@ -35,12 +35,7 @@ public class CommentsTemplate : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        //if (Instance != null)
-        //{
-        //    Debug.LogError("There should never be more than one [CLASSNAME].");
-        //}
 
-        //Instance = this;
     }
 
     /// <summary>
@@ -90,7 +85,7 @@ public class CommentsTemplate : MonoBehaviour
     /// OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider.
     /// </summary>
     /// <param name="collision">The collision data associated with this event.</param>
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         
     }
@@ -99,7 +94,7 @@ public class CommentsTemplate : MonoBehaviour
     /// OnCollisionExit is called when this collider/rigidbody has stopped touching another rigidbody/collider.
     /// </summary>
     /// <param name="collision">The collision data associated with this event.</param>
-    void OnCollisionExit(Collision collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         
     }
@@ -108,7 +103,7 @@ public class CommentsTemplate : MonoBehaviour
     /// OnCollisionStay is called once per frame for every collider/rigidbody that is touching rigidbody/collider.
     /// </summary>
     /// <param name="collision">The collision data associated with this event.</param>
-    void OnCollisionStay(Collision collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         
     }
@@ -117,7 +112,7 @@ public class CommentsTemplate : MonoBehaviour
     /// When a GameObject collides with another GameObject, Unity calls OnTriggerEnter.
     /// </summary>
     /// <param name="other">The other Collider involved in this collision.</param>
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         
     }
@@ -126,7 +121,7 @@ public class CommentsTemplate : MonoBehaviour
     /// OnTriggerExit is called when the Collider other has stopped touching the trigger.
     /// </summary>
     /// <param name="other">The other Collider involved in this collision.</param>
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit2D(Collider2D other)
     {
         
     }
@@ -135,7 +130,7 @@ public class CommentsTemplate : MonoBehaviour
     /// OnTriggerStay is called almost all the frames for every Collider other that is touching the trigger. The function is on the physics timer so it won't necessarily run every frame.
     /// </summary>
     /// <param name="other">The other Collider involved in this collision.</param>
-    void OnTriggerStay(Collider other)
+    void OnTriggerStay2D(Collider2D other)
     {
         
     }

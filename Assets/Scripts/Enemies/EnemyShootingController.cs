@@ -11,7 +11,12 @@ public class EnemyShootingController : MonoBehaviour
 
     //Serialized Fields----------------------------------------------------------------------------
 
+    [SerializeField] private float shootingRangeOnYAxis;
+
     //Non-Serialized Fields------------------------------------------------------------------------
+
+    private Enemy enemy;
+    private Weapon weapon;
 
     //private Weapon weapon;
 
@@ -23,7 +28,8 @@ public class EnemyShootingController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        //weapon = GetComponent<Weapon>();
+        enemy = GetComponent<Enemy>();
+        weapon = GetComponentInChildren<Weapon>();
     }
 
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
@@ -43,20 +49,24 @@ public class EnemyShootingController : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
-        if (IsReadyToShoot())
+        if (enemy.IsOnScreen && weapon.CanShoot() && WantToShoot())
         {
-            //weapon.Shoot();
+            weapon.Shoot();
         }
     }
 
     /// <summary>
-    /// Checks if the enemy wants to shoot at the player and is ready to shoot at the player.
+    /// Checks if the enemy wants to shoot at the player.
     /// </summary>
-    /// <returns>Whether the enemy will shoot at the player or not.</returns>
-    private bool IsReadyToShoot()
+    /// <returns>Whether the enemy wants to shoot at the player or not.</returns>
+    private bool WantToShoot()
     {
-        //TODO: check if cooldown of weapon between shots is finished.
-        //TODO: if cooldown finished, check if want to shoot
+        if (Player_Movement.Instance != null)
+        {
+            float deltaY = transform.position.y - Player_Movement.Instance.transform.position.y;
+            return deltaY > -shootingRangeOnYAxis && deltaY < shootingRangeOnYAxis;
+        }
+
         return false;
     }
 }

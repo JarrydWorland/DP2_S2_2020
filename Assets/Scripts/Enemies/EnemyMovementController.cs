@@ -11,11 +11,14 @@ public class EnemyMovementController : MonoBehaviour
 
     //Serialized Fields----------------------------------------------------------------------------
 
-    [SerializeField] private float speed;
+    [SerializeField] protected float speed;
 
     //Non-Serialized Fields------------------------------------------------------------------------
 
-    private Vector3 movement;
+    protected Vector3 movement;
+    protected Enemy enemy;
+    float xOrigin, xOffset, yOrigin, yOffset;
+    float magnitude, frequency;
 
     //Initialization Methods-------------------------------------------------------------------------------------------------------------------------
 
@@ -25,7 +28,19 @@ public class EnemyMovementController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        movement = new Vector3(0, -speed, 0);
+        movement = new Vector3(0, speed, 0);
+        enemy = GetComponent<Enemy>();
+        magnitude = Random.Range(0f, 0.5f);
+        frequency = Random.Range(-1f, 2f);
+    }
+
+    /// <summary>
+    /// Initiates when script is instantiated. Sets x and y origin for sinusoidal movement.
+    /// </summary>
+    private void Start()
+    {
+        xOrigin = this.transform.position.x;
+        yOrigin = this.transform.position.y;
     }
 
     //Core Recurring Methods-------------------------------------------------------------------------------------------------------------------------
@@ -33,19 +48,48 @@ public class EnemyMovementController : MonoBehaviour
     /// <summary>
     /// FixedUpdate() is run at a fixed interval independant of framerate.
     /// </summary>
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
-        Move();
+        MoveEnemy();
     }
 
     //Recurring Methods (FixedUpdate())--------------------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// Moves the enemy according to its speed.
+    /// Moves the boss according to its speed.
     /// </summary>
-    private void Move()
+    protected void MoveBoss()
     {
         //TODO: complex movement
         transform.Translate(movement * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// Moves the enemy sinusoidally and according to speed.
+    /// </summary>
+    private void MoveEnemy()
+    {
+        Vector3 pos = this.transform.position;
+        xOffset -= Time.deltaTime * -speed; // move towards the player
+        yOffset = Mathf.Sin(1 * Mathf.PI * Time.time) * magnitude; // move up and down
+        pos.x = xOrigin + xOffset;
+        pos.y = yOrigin + yOffset;
+        this.transform.position = pos;
+    }
+
+    //Triggered Methods------------------------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider.
+    /// </summary>
+    /// <param name="collision">The collision data associated with this event.</param>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log($"Collision, me is {collision.otherCollider}, other is {collision.collider}");
+        if (collision.collider.tag == "Map Bounds")
+        {
+            //Debug.Log($"Other is Map Bounds");
+            EnemyFactory.Instance.Destroy(enemy, enemy.Type);
+        }
     }
 }
